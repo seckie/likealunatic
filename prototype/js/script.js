@@ -20,6 +20,116 @@ if (mysheet.insertRule) {
 }
 
 /**
+ * Twitter user timeline list
+ */
+
+var TwitterUserTimeline = function (options) {
+	// extend default options
+	this.opt = {
+		jsonURL: '',
+		el: document.body
+	};
+	$.extend(this.opt, options);
+	this.$el = $(this.opt.el);
+	// initialize
+	this.initialize();
+}
+TwitterUserTimeline.prototype = {
+	initialize: function () {
+		var self = this;
+		this.count = 0;
+
+		$.ajax(this.opt.jsonURL, {
+			success: function (data) {
+				var html = '';
+				if (typeof data === 'string') {
+					data = $.parseJSON(data);
+				}
+				console.log(data);
+				for (var i=0,l=data.length; i<l ; i++) {
+					html += self.buldItem(data[i]);
+				}
+				self.$el.html(html);
+			}
+		});
+	},
+	buldItem: function (data) {
+		var text = data.text,
+			instagram,
+			html,
+			count = this.count;
+		text = this.createURLLink(text);
+		text = this.createReplyLink(text);
+		text = this.createTagLink(text);
+
+		instagram = /Instagram/.test(data.source);
+
+		html = '<div class="tweet tweet';
+		html += count;
+		html += '">';
+		html += '<div class="img">';
+		html += '<a href="http://twitter.com/';
+		html += data.user.screen_name;
+		html += '" target="_blank">';
+		if (instagram) {
+			html += '<img src="/libs/social-media-icons/32px/instagram.png';
+		} else {
+			html += '<img src="/libs/social-media-icons/32px/twitter.png';
+		}
+		html += '">';
+		html += '</a>';
+		html += '</div>';
+		html += '<div class="content">';
+		html += '<div class="contentInner">';
+		html += '<div class="contentInner2">';
+		html += '<p class="text">';
+		html += text;
+		html += '</p>';
+		html += '<div class="footer">';
+		html += '<p class="author">';
+		html += '<a target="_blank" href="http://twitter.com/';
+		html += data.user.screen_name;
+		html += '">';
+		html += data.user.screen_name;
+		html += '</a>';
+		html += '</p>';
+		html += '<p class="date">';
+		html += '<a href="http://twitter.com/';
+		html += data.user.screen_name;
+		html += '/status/';
+		html += data.id;
+		html += '" target="_blank">[';
+		html += this.convertTime(data.created_at);
+		html += ']</a>';
+		html += '</p>';
+		html += '</div></div></div></div></div>';
+
+		this.count ++;
+		return html;
+	},
+	convertTime: function (timestr) {
+//        var d = new Date(timestr);
+//        d.setHours(d.getHours() + 9);
+//        return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDay() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
+		return timestr;
+	},
+	createURLLink: function (text) {
+		text = text.replace(/(https?:\/\/[a-zA-Z0-9\-_\.\/]+)/, '<a href="$1" target="_blank">$1</a>');
+		return text;
+	},
+	createReplyLink: function (text) {
+		text = text.replace(/@([\w_]+)/, '<a href="http://twitter.com/$1" target="_blank">@$1</a>');
+		return text;
+	},
+	createTagLink: function (text) {
+		text = text.replace(/#([\w_]+)/, '<a href="http://twitter.com/#search?q=%23$1" target="_blank">#$1</a>');
+		return text;
+	}
+};
+
+
+
+/**
  * dom ready
  */
 $(function () {
@@ -35,10 +145,12 @@ $(function () {
 		isResizable: true,
 		animateOptions: {
 			complete: function () {
-				$('div.area_bd').find('div.contents-index').showVisibility();
 			}
 		}
 	});
+
+	// set contents visible
+	$('div.area_bd').find('div.contents-index').showVisibility();
 
 	/**
 	 * control bootstrap-modal
@@ -106,6 +218,11 @@ $(function () {
 		});
 	}
 	
+	// Twitter user timeline
+	new TwitterUserTimeline({
+		el: '.tweets-contents',
+		jsonURL: '/api/get_user_tl.php'
+	});
 	
 });
 

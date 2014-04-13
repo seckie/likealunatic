@@ -9,6 +9,7 @@
     "underscore": "~1.6.0",
     "backbone": "~1.1.2",
     "bootstrap": "1.4.0",
-    "jquery-masonry": "2.1.0"
+    "jquery-masonry": "2.1.0",
+    "twitteroauth": "https://github.com/abraham/twitteroauth.git#~0.1.1"
   }
 }

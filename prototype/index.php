@@ -107,9 +107,8 @@ header('Content-Type:text/html;charset=utf-8');
 
 <section class="tweets">
 <h2>Tweets (@seckie_)</h2>
-<?php
-include_once('./api/get_user_tl.php');
-?>
+<div class="tweets-contents">
+<!--/.tweets-content--></div>
 <!--/.tweets--></section>
 
 <!--/.row--></div>

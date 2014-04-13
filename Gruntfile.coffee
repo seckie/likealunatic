@@ -115,6 +115,19 @@ module.exports = (grunt) ->
             src: [ 'jquery.masonry.min.js' ]
             dest: 'app/js'
           }
+          # oAuth API
+          {
+            expand: true
+            cwd: 'bower_components/twitteroauth/'
+            src: [ '*.php' ]
+            dest: 'prototype/api/twitteroauth'
+          }
+          {
+            expand: true
+            cwd: 'bower_components/twitteroauth/'
+            src: [ '*.php' ]
+            dest: 'app/api/twitteroauth'
+          }
           # wordpress theme
           {
             expand: true

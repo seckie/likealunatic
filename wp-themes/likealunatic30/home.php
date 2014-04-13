@@ -27,9 +27,8 @@
 
 <section class="tweets">
 <h2>Tweets (@seckie_)</h2>
-<?php
-include_once($_SERVER['DOCUMENT_ROOT'] . '/api/get_user_tl.php');
-?>
+<div class="tweets-contents">
+<!--/.tweets-contents--></div>
 <!--/.tweets--></section>
 
 <!--/.contents--></div>
