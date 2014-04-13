@@ -1,7 +1,7 @@
 module.exports = (grunt) ->
   grunt.loadNpmTasks('grunt-contrib-coffee')
   grunt.loadNpmTasks('grunt-coffeelint')
-  grunt.loadNpmTasks('grunt-contrib-compass')
+  grunt.loadNpmTasks('grunt-contrib-less')
   grunt.loadNpmTasks('grunt-contrib-copy')
   grunt.loadNpmTasks('grunt-contrib-rename')
   grunt.loadNpmTasks('grunt-contrib-watch')
@@ -27,25 +27,43 @@ module.exports = (grunt) ->
         options:
           'no_trailing_whitespace':
             'level': 'error'
-    compass:
-      options:
-        httpPath: '/' # You have to reconfigure this option
-        sassDir: '_scss'
-        cssDir: 'app/css'
-        imagesDir: 'app/img'
-        relativeAssets: true
-      dev:
+    less:
+      # DOC: https://github.com/gruntjs/grunt-contrib-less
+      development:
         options:
-          environment: 'development'
-          outputStyle: 'compact'
-          noLineComments: true
-          assetCacheBuster: false
-      pro:
+          #path: 'less/*'
+          # A path to add on to the start of every url resource.
+          rootPath: '/'
+          compress: false # Default: false
+          # Compress output using clean-css.
+          cleancss: false # Default: false
+          # Enforce the css output is compatible with Internet Explorer 8.
+          ieCompat: true # Default: true
+          # Set the parser's optimization level. The lower the number, the less nodes it will create in the tree. This could matter for debugging, or if you want to access the individual nodes in the tree.
+          optimization: null # Default: null (Integer)
+          # Configures -sass-debug-info support.
+          dumpLineNumbers: false # 'comments' / 'mediaquery' / 'all'
+          # Rewrite urls to be relative. false: do not modify urls.
+          relativeUrl: true
+          report: 'min' # 'gzip' / 'min'
+        expand: true
+        flatten: true
+        cwd: 'less/'
+        src: [ '*.less' ]
+        dest: 'prototype/css/'
+        ext: '.css'
+      production:
         options:
-          environment: 'production'
-          outputStyle: 'compact'
-          noLineComments: true
-          assetCacheBuster: false
+          rootPath: '/'
+          compress: true
+          cleancss: true
+          relativeUrl: true
+        expand: true
+        flatten: true
+        cwd: 'less/'
+        src: [ '*.less' ]
+        dest: 'app/css/'
+        ext: '.css'
     copy:
       main:
         files: [
@@ -89,13 +107,13 @@ module.exports = (grunt) ->
       coffeelint:
         files: [ '_coffee/*.coffee' ]
         tasks: [ 'coffeelint' ]
-      scss:
-        files: [ '_scss/*.scss' ]
-        tasks: [ 'compass:dev' ]
+      less:
+        files: [ 'less/*.less' ]
+        tasks: [ 'less:development' ]
       js:
         files: [ 'app/js/*' ]
         tasks: [ 'jshint' ]
   )
 
-  grunt.registerTask('default', [ 'coffee', 'compass:dev', 'watch' ])
-  grunt.registerTask('deploy', [ 'copy', 'rename', 'coffee', 'compass:pro' ])
+  grunt.registerTask('default', [ 'coffee', 'less:development', 'watch' ])
+  grunt.registerTask('deploy', [ 'copy', 'rename', 'coffee', 'less:production' ])
