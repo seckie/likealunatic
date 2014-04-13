@@ -1,0 +1,143 @@
+@charset "UTF-8";
+/**
+ * Style for "likealunatic.jp"
+ *
+ * @author     Naoki Sekiguchi (likealunatic.jp)
+ * @copyright  2011 Naoki Sekiguchi (likealunatic.jp)
+ * @since      2011-12-04 16:18:29.
+ */
+@charset "UTF-8";
+.clearfix {
+  *zoom: 1;
+}
+.clearfix:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+.inline-block {
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+}
+/* area_hd
+ * ----------------------------------------*/
+.area_hd .brand a:hover {
+  text-decoration: none;
+}
+.area_hd .nav a img {
+  vertical-align: -1px;
+}
+.box {
+  float: left;
+  width: 220px;
+  margin: 0 0 15px;
+  padding: 10px;
+  border: 1px solid #cccccc;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+/* area_bd
+ * ----------------------------------------*/
+.area_bd {
+  padding: 70px 0 0;
+}
+.area_bd .description {
+  margin: 0;
+  padding-bottom: 30px;
+}
+.area_bd .contents {
+  *zoom: 1;
+}
+.area_bd .contents:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+.area_bd .contents ul {
+  margin: 0;
+}
+.area_bd .contents article, .area_bd .contents .tweet {
+  float: left;
+  width: 220px;
+  margin: 0 0 15px;
+  padding: 10px;
+  border: 1px solid #cccccc;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.area_bd .contents article h2, .area_bd .contents .tweet h2 {
+  line-height: 1.25;
+}
+.area_bd .contents article h2 img, .area_bd .contents .tweet h2 img {
+  float: left;
+  margin: 0 10px 4px 0;
+  vertical-align: top;
+}
+.area_bd .contents article .summary, .area_bd .contents .tweet .summary {
+  clear: both;
+}
+.area_bd .contents article footer, .area_bd .contents .tweet footer {
+  clear: both;
+  padding-top: 8px;
+}
+.area_bd .contents article footer p, .area_bd .contents .tweet footer p {
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+  font-size: 11px;
+  margin: 0;
+}
+.area_bd .contents article footer p.categories, .area_bd .contents .tweet footer p.categories {
+  margin-right: 1em;
+}
+.area_bd .contents .img {
+  float: left;
+  margin: 0 10px 4px 0;
+}
+.area_bd .contents .footer {
+  clear: both;
+  padding-top: 8px;
+  border-top: 1px solid #EEEEEE;
+}
+.area_bd .contents .footer p {
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+  margin: 0;
+  font-size: 11px;
+}
+.area_bd .contents .footer p.author {
+  margin-right: 1em;
+}
+.tweets {
+  *zoom: 1;
+}
+.tweets:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+.tweets ul {
+  margin: 0;
+}
+/* area_ft
+ * ----------------------------------------*/
+.area_ft .copyright small {
+  margin-right: .5em;
+}
+.area_ft .copyright a {
+  color: inherit;
+}

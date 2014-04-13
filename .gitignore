@@ -1,1 +1,9 @@
+php.ini
 wp-*
+xmlrpc.php
+readme.html
+readme-ja.html
+license.txt
+app/index.php
+app/libs
+prototype/libs
