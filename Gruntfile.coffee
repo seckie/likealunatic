@@ -103,6 +103,18 @@ module.exports = (grunt) ->
             src: [ 'backbone.js' ]
             dest: 'app/js/'
           }
+          {
+            expand: true
+            cwd: 'bower_components/jquery-masonry/'
+            src: [ 'jquery.masonry.min.js' ]
+            dest: 'prototype/js/'
+          }
+          {
+            expand: true
+            cwd: 'bower_components/jquery-masonry/'
+            src: [ 'jquery.masonry.min.js' ]
+            dest: 'app/js'
+          }
         ]
     rename:
       main:

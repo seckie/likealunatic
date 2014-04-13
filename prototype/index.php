@@ -11,7 +11,7 @@ header('Content-Type:text/html;charset=utf-8');
 <!--[if lte IE 8]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 <!--<script src="/js/modenizr.js"></script>-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<script src="/libs/jquery-masonry/jquery.masonry.min.js"></script>
+<script src="js/jquery.masonry.min.js"></script>
 <script src="js/script.js"></script>
 
 </head>
