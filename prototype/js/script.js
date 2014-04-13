@@ -27,7 +27,8 @@ var TwitterUserTimeline = function (options) {
 	// extend default options
 	this.opt = {
 		jsonURL: '',
-		el: document.body
+		el: document.body,
+		complete: function () {}
 	};
 	$.extend(this.opt, options);
 	this.$el = $(this.opt.el);
@@ -50,6 +51,7 @@ TwitterUserTimeline.prototype = {
 					html += self.buldItem(data[i]);
 				}
 				self.$el.html(html);
+				self.opt.complete();
 			}
 		});
 	},
@@ -134,23 +136,29 @@ TwitterUserTimeline.prototype = {
  */
 $(function () {
 	// shuffle and sort
-	$('div.area_bd').find('div.contents-index')
-		.sortContents('article, .tweet').remove();
+	var $container = $('div.area_bd').find('div.contents-index'); 
 
-	// masonry
-	$('div.area_bd').find('div.contents-index').masonry({
-		itemSelector: 'article, .tweet',
-		columnWidth: 220,
-		gutterWidth: 15,
-		isResizable: true,
-		animateOptions: {
-			complete: function () {
-			}
+	// Twitter user timeline
+	new TwitterUserTimeline({
+		el: '.tweets-contents',
+		jsonURL: '/api/get_user_tl.php',
+		complete: function () {
+			$container.sortContents('article, .tweet').remove();
+			// masonry
+			$('div.area_bd').find('div.contents-index').masonry({
+				itemSelector: 'article, .tweet',
+				columnWidth: 220,
+				gutterWidth: 15,
+				isResizable: true,
+				animateOptions: {
+					complete: function () { }
+				}
+			});
+			// set contents visible
+			$('div.area_bd').find('div.contents-index').showVisibility();
 		}
 	});
 
-	// set contents visible
-	$('div.area_bd').find('div.contents-index').showVisibility();
 
 	/**
 	 * control bootstrap-modal
@@ -217,12 +225,6 @@ $(function () {
 			'margin-left': -1 * (imgWidth + 30) / 2
 		});
 	}
-	
-	// Twitter user timeline
-	new TwitterUserTimeline({
-		el: '.tweets-contents',
-		jsonURL: '/api/get_user_tl.php'
-	});
 	
 });
 
