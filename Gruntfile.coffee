@@ -62,7 +62,7 @@ module.exports = (grunt) ->
         flatten: true
         cwd: 'less/'
         src: [ '*.less' ]
-        dest: 'app/css/'
+        dest: 'app/wp-content/themes/likealunatic30/'
         ext: '.css'
     copy:
       main:
@@ -114,6 +114,13 @@ module.exports = (grunt) ->
             cwd: 'bower_components/jquery-masonry/'
             src: [ 'jquery.masonry.min.js' ]
             dest: 'app/js'
+          }
+          # wordpress theme
+          {
+            expand: true
+            cwd: 'wp-themes/likealunatic30/'
+            src: [ '*' ]
+            dest: 'app/wp-content/themes/likealunatic30'
           }
         ]
     rename:
