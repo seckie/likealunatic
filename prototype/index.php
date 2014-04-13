@@ -6,7 +6,7 @@ header('Content-Type:text/html;charset=utf-8');
 <head>
 <meta charset="UTF-8">
 <title>Like@Lunatic</title>
-<link rel="stylesheet" href="/libs/bootstrap/bootstrap.css" />
+<link rel="stylesheet" href="css/bootstrap.css" />
 <link rel="stylesheet" href="css/style.css" />
 <!--[if lte IE 8]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 <!--<script src="/js/modenizr.js"></script>-->
