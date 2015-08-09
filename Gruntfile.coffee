@@ -16,7 +16,7 @@ module.exports = (grunt) ->
         flatten: true
         cwd: '_coffee/'
         src: [ '*.coffee' ]
-        dest: 'app/js/'
+        dest: 'public/js/'
         ext: '.js'
     coffeelint:
       # DOC: https://github.com/vojtajina/grunt-coffeelint
@@ -62,7 +62,7 @@ module.exports = (grunt) ->
         flatten: true
         cwd: 'less/'
         src: [ '*.less' ]
-        dest: 'app/wp-content/themes/likealunatic30/'
+        dest: 'public/wp-content/themes/likealunatic30/'
         ext: '.css'
     copy:
       main:
@@ -77,31 +77,31 @@ module.exports = (grunt) ->
             expand: true
             cwd: 'bower_components/bootstrap/'
             src: [ 'bootstrap.min.css' ]
-            dest: 'app/css/'
+            dest: 'public/css/'
           }
           {
             expand: true
             cwd: 'bower_components/jquery/dist/'
             src: [ 'jquery.min.js' ]
-            dest: 'app/js/'
+            dest: 'public/js/'
           }
           {
             expand: true
             cwd: 'bower_components/jquery-1.11.0/'
             src: [ 'index.js' ]
-            dest: 'app/js/'
+            dest: 'public/js/'
           }
           {
             expand: true
             cwd: 'bower_components/underscore/'
             src: [ 'underscore.js' ]
-            dest: 'app/js/'
+            dest: 'public/js/'
           }
           {
             expand: true
             cwd: 'bower_components/backbone/'
             src: [ 'backbone.js' ]
-            dest: 'app/js/'
+            dest: 'public/js/'
           }
           {
             expand: true
@@ -113,7 +113,7 @@ module.exports = (grunt) ->
             expand: true
             cwd: 'bower_components/jquery-masonry/'
             src: [ 'jquery.masonry.min.js' ]
-            dest: 'app/js'
+            dest: 'public/js'
           }
           # oAuth API
           {
@@ -126,22 +126,22 @@ module.exports = (grunt) ->
             expand: true
             cwd: 'bower_components/twitteroauth/'
             src: [ '*.php' ]
-            dest: 'app/api/twitteroauth'
+            dest: 'public/api/twitteroauth'
           }
           # wordpress theme
           {
             expand: true
             cwd: 'wp-themes/likealunatic30/'
             src: [ '*' ]
-            dest: 'app/wp-content/themes/likealunatic30'
+            dest: 'public/wp-content/themes/likealunatic30'
           }
         ]
     rename:
       main:
         files: [
           {
-            src: [ 'app/js/index.js' ]
-            dest: 'app/js/jquery-1.11.0.min.js'
+            src: [ 'public/js/index.js' ]
+            dest: 'public/js/jquery-1.11.0.min.js'
           }
         ]
     watch:
@@ -155,7 +155,7 @@ module.exports = (grunt) ->
         files: [ 'less/*.less' ]
         tasks: [ 'less:development' ]
       js:
-        files: [ 'app/js/*' ]
+        files: [ 'public/js/*' ]
         tasks: [ 'jshint' ]
   )
 
