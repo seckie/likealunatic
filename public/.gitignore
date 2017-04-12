@@ -1,8 +1,10 @@
 php.ini
-wp-*
+wp-*.php
+wp-includes
+wp-admin
 xmlrpc.php
-readme.html
-readme-ja.html
-license.txt
-index.php
+wp-content/plugins
+wp-content/uploads
+wp-content/upgrade
+wp-content/themes/twenty*
 libs
