@@ -24,15 +24,13 @@
 		echo ' | ' . sprintf( __( 'Page %s', 'twentyeleven' ), max( $paged, $page ) );
 
 	?></title>
-<link rel="stylesheet" href="<?php bloginfo('url'); ?>/libs/bootstrap/bootstrap.css" />
+<link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/libs/bootstrap.css" />
 <link rel="stylesheet" href="<?php bloginfo( 'stylesheet_url' ); ?>" />
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
-<!--[if lt IE 9]><script src="<?php echo get_template_directory_uri(); ?>/js/html5.js"></script><![endif]-->
-<!--<script src="/js/modenizr.js"></script>-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<script src="<?php bloginfo('url'); ?>/libs/jquery-masonry/jquery.masonry.min.js"></script>
-<script src="<?php bloginfo('url'); ?>/libs/bootstrap/js/bootstrap-modal.js"></script>
-<script src="<?php bloginfo('url'); ?>/js/script.js"></script>
+<script src="<?php echo get_stylesheet_directory_uri(); ?>/libs/jquery.masonry.min.js"></script>
+<script src="<?php echo get_stylesheet_directory_uri(); ?>/libs/bootstrap-modal.js"></script>
+<script src="<?php echo get_stylesheet_directory_uri(); ?>/script.js"></script>
 <?php
 	/* We add some JavaScript to pages with the comment form
 	 * to support sites with threaded comments (when in use).
