@@ -166,30 +166,40 @@ $(function () {
   $('a[href$=".jpg"], a[href$=".gif"], a[href$=".png"]').each(function (i, trigger) {
     if (!trigger.href) { return this; }
 
-    var box = $('<div class="modal fade"/>');
-    var content = '<div class="modal-header"><a href="#" class="close">&times;</a>';
-    var title = this.title || $(this).find('img').attr('title');
-    if (title) {
-      content += '<h3>' + title + '</h3>';
-    }
-    content += '</div>';
-    content += '<div class="modal-body">';
-    content += '<img src="' + this.href + '" alt="" />';
-    content += '</div>';
-    box.append(content);
-    box.appendTo(document.body);
+    const $box = $('<div class="modal fade" role="dialog"/>');
+    const title = this.title || $(this).find('img').attr('title');
+    const titleElement = title ? `<h3>${title}</h3>` : '';
+    const content = `
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        ${titleElement}
+        <h4 class="modal-title">Modal title</h4>
+      </div>
+      <div class="modal-body"><img src="${this.href}" alt="" /></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+    `;
+    $box.html(content);
+    $box.appendTo(document.body);
     // activate
-    box.modal({
+    $box.modal({
       backdrop: true,
-      keyboard: true
+      keyboard: true,
+      show: false
     });
     // preload img
-    var img = preloadImg(this.href);
+    const $img = preloadImg(this.href);
 
     // bind event
     $(trigger).on('click', function (e) {
-      box.modal('toggle')
-      layoutModal(box, img);
+      $box.modal('toggle')
+      //layoutModal($box, $img);
       e.preventDefault();
     });
   });
@@ -206,20 +216,20 @@ $(function () {
     wrapper.appendTo(document.body);
     return img;
   }
-  function layoutModal(box, img) {
-    var imgWidth = img.width();
-    var imgHeight = img.height();
+  function layoutModal($box, $img) {
+    var imgWidth = $img.width();
+    var imgHeight = $img.height();
     var winHeight = $(window).height();
 
     // when a large image overflow from window
     if (winHeight < imgHeight + 30) {
-      box.css({
+      $box.css({
         'position': 'absolute',
         'top': (document.documentElement.scrollTop || document.body.scrollTop) + (winHeight / 2)
       });
     }
 
-    box.css({
+    $box.css({
       'width': imgWidth + 30,
       'margin-top': -1 * Math.min(winHeight / 2, (imgHeight + 60) / 2),
       'margin-left': -1 * (imgWidth + 30) / 2

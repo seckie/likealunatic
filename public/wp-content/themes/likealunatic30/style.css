@@ -44,10 +44,6 @@ pre code {
 /**
  * overwrite "bootstrap" style
  */
-.modal.fade {
-  top: -100%;
-}
-
 .modal-header:after {
   content: "";
   display: block;

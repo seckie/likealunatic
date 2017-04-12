@@ -212,30 +212,25 @@
 	      return this;
 	    }
 
-	    var box = $('<div class="modal fade"/>');
-	    var content = '<div class="modal-header"><a href="#" class="close">&times;</a>';
+	    var $box = $('<div class="modal fade" role="dialog"/>');
 	    var title = this.title || $(this).find('img').attr('title');
-	    if (title) {
-	      content += '<h3>' + title + '</h3>';
-	    }
-	    content += '</div>';
-	    content += '<div class="modal-body">';
-	    content += '<img src="' + this.href + '" alt="" />';
-	    content += '</div>';
-	    box.append(content);
-	    box.appendTo(document.body);
+	    var titleElement = title ? "<h3>" + title + "</h3>" : '';
+	    var content = "\n  <div class=\"modal-dialog\" role=\"document\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>\n        " + titleElement + "\n        <h4 class=\"modal-title\">Modal title</h4>\n      </div>\n      <div class=\"modal-body\"><img src=\"" + this.href + "\" alt=\"\" /></div>\n      <div class=\"modal-footer\">\n        <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>\n      </div>\n    </div>\n  </div>\n</div>\n    ";
+	    $box.html(content);
+	    $box.appendTo(document.body);
 	    // activate
-	    box.modal({
+	    $box.modal({
 	      backdrop: true,
-	      keyboard: true
+	      keyboard: true,
+	      show: false
 	    });
 	    // preload img
-	    var img = preloadImg(this.href);
+	    var $img = preloadImg(this.href);
 
 	    // bind event
 	    $(trigger).on('click', function (e) {
-	      box.modal('toggle');
-	      layoutModal(box, img);
+	      $box.modal('toggle');
+	      //layoutModal($box, $img);
 	      e.preventDefault();
 	    });
 	  });
@@ -252,20 +247,20 @@
 	    wrapper.appendTo(document.body);
 	    return img;
 	  }
-	  function layoutModal(box, img) {
-	    var imgWidth = img.width();
-	    var imgHeight = img.height();
+	  function layoutModal($box, $img) {
+	    var imgWidth = $img.width();
+	    var imgHeight = $img.height();
 	    var winHeight = $(window).height();
 
 	    // when a large image overflow from window
 	    if (winHeight < imgHeight + 30) {
-	      box.css({
+	      $box.css({
 	        'position': 'absolute',
 	        'top': (document.documentElement.scrollTop || document.body.scrollTop) + winHeight / 2
 	      });
 	    }
 
-	    box.css({
+	    $box.css({
 	      'width': imgWidth + 30,
 	      'margin-top': -1 * Math.min(winHeight / 2, (imgHeight + 60) / 2),
 	      'margin-left': -1 * (imgWidth + 30) / 2
