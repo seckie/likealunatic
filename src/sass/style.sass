@@ -1,0 +1,239 @@
+@charset "UTF-8"
+/*
+  Theme Name: Like@Lunatic 30
+  Theme URI: http://likealunatic.jp/
+  Author: Naoki Sekiguchi
+  Author URI: http://likealunatic.jp/
+  Description: A theme for likealunatic.jp. Based on bootstrap, from twitter.
+  Template: twentyeleven
+  Version: 1.0
+  Since: 2012-01-02
+  */
+
+
+@import "_mixin"
+
+/**
+ * base
+ */
+body
+  font-family: Helvetica, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic", Meiryo, "メイリオ",  Osaka, sans-serif
+pre code
+  padding: 0
+  background-color: transparent
+
+/**
+ * general class
+ */
+
+.clearfix:after
+  content: ""
+  display: block
+  clear: both
+
+.inline-block
+  display: inline-block
+
+.hidden
+  position: absolute
+  width: 0
+  height: 0
+  overflow: hidden
+
+/**
+ * overwrite "bootstrap" style
+ */
+.modal
+  &.fade
+    top: -100%
+
+.modal-header
+  +clearfix
+
+
+/* area_hd
+ * ----------------------------------------*/
+.area_hd
+  .brand
+    a:hover
+      text-decoration: none
+  .nav
+    a
+      img
+        vertical-align: -1px
+
+.box
+  float: left
+  width: 220px
+  margin: 0 0 15px
+  padding: 10px
+  border: 1px solid #cccccc
+  border-radius: 5px
+  box-sizing: border-box
+
+
+/* area_bd
+ * ----------------------------------------*/
+.area_bd
+  padding: 40px + 30px 0 30px
+  .description
+    margin: 0
+    padding-bottom: 30px
+  .contents-index
+    +clearfix
+    ul
+      margin: 0
+    article,
+    .tweet
+      @extend .box
+      h2
+        font-size: 14px
+        line-height: 1.21
+        img
+          float: left
+          margin: 1px 10px 4px 0
+          vertical-align: top
+      .summary
+        clear: both
+      footer
+        clear: both
+        padding-top: 8px
+        p
+          display: inline-block
+          font-size: 11px
+          margin: 0
+          &.categories
+            margin-right: 1em
+    .img
+      float: left
+      margin: 0 10px 4px 0
+    .footer
+      clear: both
+      padding-top: 8px
+      border-top: 1px solid #EEEEEE
+      p
+        display: inline-block
+        margin: 0
+        font-size: 11px
+        &.author
+          margin-right: 1em
+
+.tweets
+  +clearfix
+  ul
+    margin: 0
+
+/* area_ft
+ * ----------------------------------------*/
+.area_ft
+  .copyright
+    small
+      margin-right: .5em
+    a
+      color: inherit
+
+/* styles from "twentyeleven" theme
+ * ----------------------------------------*/
+.entry-header
+  position: relative
+.entry-meta
+  .sep
+    margin: 0 .5em
+
+/* Comments link */
+// .comments-link
+//   a
+//   .leave-reply
+//     visibility: hidden
+
+/* overwrite "twentyeleven" theme
+ * ----------------------------------------*/
+
+article.post
+  margin-bottom: 60px
+  .entry-title
+    font-size: 24px
+    line-height: 36px
+  h2
+    margin-bottom: 9px
+    font-size: 20px
+    line-height: 30px
+  h3, h4, h5, h6
+    margin-bottom: 9px
+    line-height: 30px
+  h3
+    font-size: 18px
+  h4
+    font-size: 16px
+  h5
+    font-size: 14px
+  h6
+    font-size: 13px
+  .alignleft
+    float: left
+    margin-right: 10px
+  .alignright
+    float: right
+    margin-left: 10px
+
+#respond
+  padding-top: 40px + 10px
+
+#comments
+  margin-top: 24px
+
+#commentform
+  p
+    position: relative
+  input[type="text"]
+    width: 270px
+    margin-left: 15px
+  textarea
+    width: 510px
+    margin-left: 15px
+  .comment-notes
+    .required
+      position: static
+  .required
+    position: absolute
+    top: .5em
+    left: 133px
+.commentlist
+  margin-left: 0
+  margin-bottom: 36px
+  li
+    list-style-type: none
+  .comment
+    +clearfix
+  .comment-author
+    .photo
+      float: left
+      margin-right: 10px
+  .comment-content
+    margin-left: 78px
+.entry-meta
+  margin: 18px 0
+  .by-author
+    margin-left: .5em
+  .comments-link
+    b
+      font-size: 14px
+      &:before
+        content: " ( "
+      &:after
+        content: " ) "
+.pagination
+  margin: 36px 0 0
+  ul
+    margin-left: auto
+.widget
+  clear: both
+.widget_archive
+  padding-bottom: 18px
+.tagcloud
+  padding-bottom: 18px
+.pagination
+  h3
+    float: left
+    margin-right: 1em
+    font-size: 12px
