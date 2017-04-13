@@ -1,5 +1,5 @@
 <article class="span4" id="post-<?php the_ID(); ?>">
-<h2><a href="<?php the_permalink(); ?>" rel="bookmark"><img src="<?php echo get_stylesheet_directory_uri(); ?>/libs/social-media-icons/32px/wordpress.png" alt="From WordPress" width="32" height="32" /> <?php the_title(); ?></a></h2>
+<h3><a href="<?php the_permalink(); ?>" rel="bookmark"><img src="<?php echo get_stylesheet_directory_uri(); ?>/libs/social-media-icons/32px/wordpress.png" alt="From WordPress" width="32" height="32" /> <?php the_title(); ?></a></h3>
 <div class="summary">
 <?php
 // The function is defined in header.php

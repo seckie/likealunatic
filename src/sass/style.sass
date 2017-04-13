@@ -54,6 +54,7 @@ pre code
 /* area_hd
  * ----------------------------------------*/
 .area_hd
+  margin: 0
   .brand
     a:hover
       text-decoration: none
@@ -75,7 +76,7 @@ pre code
 /* area_bd
  * ----------------------------------------*/
 .area_bd
-  padding: 40px + 30px 0 30px
+  padding: 30px 0 30px
   .description
     margin: 0
     padding-bottom: 30px
@@ -86,7 +87,8 @@ pre code
     article,
     .tweet
       @extend .box
-      h2
+      h3
+        margin: 0
         font-size: 14px
         line-height: 1.21
         img
@@ -95,6 +97,7 @@ pre code
           vertical-align: top
       .summary
         clear: both
+        overflow: hidden
       footer
         clear: both
         padding-top: 8px

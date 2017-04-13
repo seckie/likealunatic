@@ -9,6 +9,7 @@
  * @since      2012-01-02
  */
 
+const STYLESHEET_DIRECTORY = window.STYLESHEET_DIRECTORY || '';
 
 // add CSS rule to hide default contents
 var mysheet = document.styleSheets[0];
@@ -56,56 +57,39 @@ TwitterUserTimeline.prototype = {
     });
   },
   buldItem: function (data) {
-    var text = data.text,
-        instagram,
-        html,
-        count = this.count;
+    let text = data.text
     text = this.createURLLink(text);
     text = this.createReplyLink(text);
     text = this.createTagLink(text);
-
-    instagram = /Instagram/.test(data.source);
-
-    html = '<div class="tweet tweet';
-    html += count;
-    html += '">';
-    html += '<div class="img">';
-    html += '<a href="http://twitter.com/';
-    html += data.user.screen_name;
-    html += '" target="_blank">';
-    if (instagram) {
-      html += '<img src="/libs/social-media-icons/32px/instagram.png';
-    } else {
-      html += '<img src="/libs/social-media-icons/32px/twitter.png';
-    }
-    html += '">';
-    html += '</a>';
-    html += '</div>';
-    html += '<div class="content">';
-    html += '<div class="contentInner">';
-    html += '<div class="contentInner2">';
-    html += '<p class="text">';
-    html += text;
-    html += '</p>';
-    html += '<div class="footer">';
-    html += '<p class="author">';
-    html += '<a target="_blank" href="http://twitter.com/';
-    html += data.user.screen_name;
-    html += '">';
-    html += data.user.screen_name;
-    html += '</a>';
-    html += '</p>';
-    html += '<p class="date">';
-    html += '<a href="http://twitter.com/';
-    html += data.user.screen_name;
-    html += '/status/';
-    html += data.id;
-    html += '" target="_blank">[';
-    html += this.convertTime(data.created_at);
-    html += ']</a>';
-    html += '</p>';
-    html += '</div></div></div></div></div>';
-
+    const isInstagram = () => /Instagram/.test(data.source);
+    const iconName = isInstagram() ? 'instagram' : 'twitter';
+    const iconAlt = isInstagram() ? 'Instagram' : 'Twitter';
+    const html = `
+    <div class="tweet tweet${this.count}">
+      <div class="img">
+        <a href="http://twitter.com/${data.user.screen_name}" target="_blank">
+          <img src="${STYLESHEET_DIRECTORY}/libs/social-media-icons/32px/${iconName}.png" alt="${iconAlt}" width="32" height="32" />
+        </a>
+      </div>
+      <div class="content">
+        <div class="contentInner">
+          <div class="contentInner2">
+            <p class="text">${text}</p>
+            <div class="footer">
+              <p class="author">
+                <a target="_blank" href="http://twitter.com/${data.user.screen_name}">
+                  ${data.user.screen_name}</a>
+              </p>
+              <p class="date">
+                <a href="http://twitter.com/${data.user.screen_name}/status/${data.id}" target="_blank">
+                [${this.convertTime(data.created_at)}]</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    `;
     this.count ++;
     return html;
   },

@@ -27,6 +27,7 @@
 <link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/libs/bootstrap.min.css" />
 <link rel="stylesheet" href="<?php bloginfo( 'stylesheet_url' ); ?>" />
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
+<script>window.STYLESHEET_DIRECTORY = '<?php echo get_stylesheet_directory_uri();?>';</script>
 <script src="<?php echo get_stylesheet_directory_uri(); ?>/libs/jquery.min.js"></script>
 <script src="<?php echo get_stylesheet_directory_uri(); ?>/libs/jquery.masonry.min.js"></script>
 <script src="<?php echo get_stylesheet_directory_uri(); ?>/libs/bootstrap.min.js"></script>

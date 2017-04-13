@@ -55,8 +55,9 @@
 	 * @since      2012-01-02
 	 */
 
-	// add CSS rule to hide default contents
+	var STYLESHEET_DIRECTORY = window.STYLESHEET_DIRECTORY || '';
 
+	// add CSS rule to hide default contents
 	var mysheet = document.styleSheets[0];
 	var totalrules = mysheet.cssRules ? mysheet.cssRules.length : mysheet.rules.length;
 	if (mysheet.insertRule) {
@@ -103,56 +104,17 @@
 	    });
 	  },
 	  buldItem: function buldItem(data) {
-	    var text = data.text,
-	        instagram,
-	        html,
-	        count = this.count;
+	    var text = data.text;
 	    text = this.createURLLink(text);
 	    text = this.createReplyLink(text);
 	    text = this.createTagLink(text);
-
-	    instagram = /Instagram/.test(data.source);
-
-	    html = '<div class="tweet tweet';
-	    html += count;
-	    html += '">';
-	    html += '<div class="img">';
-	    html += '<a href="http://twitter.com/';
-	    html += data.user.screen_name;
-	    html += '" target="_blank">';
-	    if (instagram) {
-	      html += '<img src="/libs/social-media-icons/32px/instagram.png';
-	    } else {
-	      html += '<img src="/libs/social-media-icons/32px/twitter.png';
-	    }
-	    html += '">';
-	    html += '</a>';
-	    html += '</div>';
-	    html += '<div class="content">';
-	    html += '<div class="contentInner">';
-	    html += '<div class="contentInner2">';
-	    html += '<p class="text">';
-	    html += text;
-	    html += '</p>';
-	    html += '<div class="footer">';
-	    html += '<p class="author">';
-	    html += '<a target="_blank" href="http://twitter.com/';
-	    html += data.user.screen_name;
-	    html += '">';
-	    html += data.user.screen_name;
-	    html += '</a>';
-	    html += '</p>';
-	    html += '<p class="date">';
-	    html += '<a href="http://twitter.com/';
-	    html += data.user.screen_name;
-	    html += '/status/';
-	    html += data.id;
-	    html += '" target="_blank">[';
-	    html += this.convertTime(data.created_at);
-	    html += ']</a>';
-	    html += '</p>';
-	    html += '</div></div></div></div></div>';
-
+	    var isInstagram = function isInstagram() {
+	      return (/Instagram/.test(data.source)
+	      );
+	    };
+	    var iconName = isInstagram() ? 'instagram' : 'twitter';
+	    var iconAlt = isInstagram() ? 'Instagram' : 'Twitter';
+	    var html = '\n    <div class="tweet tweet' + this.count + '">\n      <div class="img">\n        <a href="http://twitter.com/' + data.user.screen_name + '" target="_blank">\n          <img src="' + STYLESHEET_DIRECTORY + '/libs/social-media-icons/32px/' + iconName + '.png" alt="' + iconAlt + '" width="32" height="32" />\n        </a>\n      </div>\n      <div class="content">\n        <div class="contentInner">\n          <div class="contentInner2">\n            <p class="text">' + text + '</p>\n            <div class="footer">\n              <p class="author">\n                <a target="_blank" href="http://twitter.com/' + data.user.screen_name + '">\n                  ' + data.user.screen_name + '</a>\n              </p>\n              <p class="date">\n                <a href="http://twitter.com/' + data.user.screen_name + '/status/' + data.id + '" target="_blank">\n                [' + this.convertTime(data.created_at) + ']</a>\n              </p>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n    ';
 	    this.count++;
 	    return html;
 	  },
@@ -214,8 +176,8 @@
 
 	    var $box = $('<div class="modal fade" role="dialog"/>');
 	    var title = this.title || $(this).find('img').attr('title');
-	    var titleElement = title ? "<h3>" + title + "</h3>" : '';
-	    var content = "\n  <div class=\"modal-dialog\" role=\"document\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>\n        " + titleElement + "\n        <h4 class=\"modal-title\">Modal title</h4>\n      </div>\n      <div class=\"modal-body\"><img src=\"" + this.href + "\" alt=\"\" /></div>\n      <div class=\"modal-footer\">\n        <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>\n      </div>\n    </div>\n  </div>\n</div>\n    ";
+	    var titleElement = title ? '<h3>' + title + '</h3>' : '';
+	    var content = '\n  <div class="modal-dialog" role="document">\n    <div class="modal-content">\n      <div class="modal-header">\n        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>\n        ' + titleElement + '\n        <h4 class="modal-title">Modal title</h4>\n      </div>\n      <div class="modal-body"><img src="' + this.href + '" alt="" /></div>\n      <div class="modal-footer">\n        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>\n      </div>\n    </div>\n  </div>\n</div>\n    ';
 	    $box.html(content);
 	    $box.appendTo(document.body);
 	    // activate
