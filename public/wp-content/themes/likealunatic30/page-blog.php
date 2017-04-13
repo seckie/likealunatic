@@ -16,30 +16,30 @@ get_header(); ?>
 
 <div class="container area_bd">
 <div class="row">
-	
-		<div class="span12" id="primary">
-			<div id="content" role="main">
 
-			<?php
-				$temp_query = clone $wp_query;
-				query_posts('posts_per_page=5');
-			?>
-			<?php if ( have_posts() ) : ?>
+    <div class="span12" id="primary">
+      <div id="content" role="main">
 
-				<?php /* Start the Loop */ ?>
-				<?php while ( have_posts() ) : the_post(); ?>
+      <?php
+        $temp_query = clone $wp_query;
+        query_posts('posts_per_page=5');
+      ?>
+      <?php if ( have_posts() ) : ?>
 
-					<?php get_template_part( 'content', 'blog' ); ?>
+        <?php /* Start the Loop */ ?>
+        <?php while ( have_posts() ) : the_post(); ?>
 
-				<?php endwhile; ?>
+          <?php get_template_part( 'content', 'blog' ); ?>
 
-				<?php likealunatic30_content_nav( 'nav-below' ); ?>
+        <?php endwhile; ?>
 
-			<?php endif; ?>
-			<?php $wp_query = clone $temp_query; ?>
+        <?php likealunatic30_content_nav( 'nav-below' ); ?>
 
-			</div><!-- #content -->
-		</div><!-- #primary -->
+      <?php endif; ?>
+      <?php $wp_query = clone $temp_query; ?>
+
+      </div><!-- #content -->
+    </div><!-- #primary -->
 
 <?php get_sidebar(); ?>
 
