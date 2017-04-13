@@ -167,12 +167,29 @@ pre code {
 
 /* area_ft
  * ----------------------------------------*/
+.area_ft {
+  padding: 35px 0;
+  background-color: #222;
+  border-color: #080808;
+  color: #9d9d9d;
+}
+
+.area_ft .copyright {
+  margin: 0;
+}
+
 .area_ft .copyright small {
   margin-right: .5em;
+  font-size: 100%;
 }
 
 .area_ft .copyright a {
-  color: inherit;
+  color: #9d9d9d;
+  text-decoration: underline;
+}
+
+.area_ft .copyright a:hover, .area_ft .copyright a:focus, .area_ft .copyright a:active {
+  color: white;
 }
 
 /* styles from "twentyeleven" theme
@@ -310,14 +327,6 @@ article.post .alignright {
   content: " ) ";
 }
 
-.pagination {
-  margin: 36px 0 0;
-}
-
-.pagination ul {
-  margin-left: auto;
-}
-
 .widget {
   clear: both;
 }
@@ -328,10 +337,4 @@ article.post .alignright {
 
 .tagcloud {
   padding-bottom: 18px;
-}
-
-.pagination h3 {
-  float: left;
-  margin-right: 1em;
-  font-size: 12px;
 }

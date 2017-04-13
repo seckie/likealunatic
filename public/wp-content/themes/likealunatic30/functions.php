@@ -18,16 +18,13 @@ function likealunatic30_content_nav( $nav_id ) {
   global $wp_query;
 
   if ( $wp_query->max_num_pages > 1 ) : ?>
-    <nav class="pagination" id="<?php echo $nav_id; ?>">
-      <h3 class="assistive-text"><?php _e( 'Post navigation', 'twentyeleven' ); ?></h3>
-      <ul>
+    <nav class="pagination-wrapper" id="<?php echo $nav_id; ?>">
+      <ul class="pagination pagination-lg">
       <li class="prev nav-previous"><?php next_posts_link( __( '<span class="meta-nav">&larr;</span> Older posts', 'twentyeleven' ) ); ?></li>
       <li class="next nav-next"><?php previous_posts_link( __( 'Newer posts <span class="meta-nav">&rarr;</span>', 'twentyeleven' ) ); ?></li>
       </ul>
-    </nav><!-- #<?php echo $nav_id; ?> -->
+    <!-- #<?php echo $nav_id; ?> --></nav>
   <?php endif;
 }
 endif; // likealunatic30_content_nav
 
-
-?>
