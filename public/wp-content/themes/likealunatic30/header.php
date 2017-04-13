@@ -47,39 +47,26 @@
 ?>
 </head>
 <body <?php body_class(); ?>>
-<header class="topbar area_hd"<?php
-if (is_user_logged_in()) {
-  echo ' style="margin-top:28px;"';
-}
-?>>
-<div class="topbar-inner">
-<div class="container">
-  <p class="brand"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
-  <nav class="global">
-  <ul class="nav">
-    <li<?php if (is_home()) {
-      echo ' class="active"';
-    } ?>><a href="<?php bloginfo('url'); ?>/">Home</a></li>
-    <li<?php if (is_page('blog') || (!is_home() && !is_page())) {
-      echo ' class="active"';
-    }?>><a href="<?php bloginfo('url'); ?>/blog/">Blog</a></li>
-    <li<?php if (is_page('about')) {
-      echo ' class="active"';
-    }?>><a href="<?php bloginfo('url'); ?>/about">About</a></li>
+<nav class="navbar navbar-inverse area_hd">
+<div class="container-fluid">
+<div class="navbar-header">
+  <a class="navbar-brand" href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a>
+<!--/.navbar-header--></div>
+<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+  <ul class="nav navbar-nav">
+    <li<?php if (is_home()) { ?> class="active"<?php } ?>><a href="<?php bloginfo('url'); ?>/">Home</a></li>
+    <li<?php if (is_page('blog') || (!is_home() && !is_page())) { ?> class="active"<?php }?>><a href="<?php bloginfo('url'); ?>/blog/">Blog</a></li>
+    <li<?php if (is_page('about')) { ?> class="active"<?php } ?>><a href="<?php bloginfo('url'); ?>/about">About</a></li>
   </ul>
-  <!--/.global--></nav>
-
   <?php get_search_form(); ?>
-  <aside class="social">
-  <ul class="nav secondary-nav">
-    <li><a href="https://twitter.com/seckie_"><img src="/libs/social-media-icons/16px/twitter.png" alt="" width="16" height="16" /> Twitter</a></li>
-    <li><a href="https://www.facebook.com/profile.php?id=100001227105896"><img src="/libs/social-media-icons/16px/facebook.png" alt="" width="16" height="16" /> Facebook</a></li>
-    <li><a href="https://github.com/seckie"><img src="/libs/social-media-icons/16px/github.png" alt="" width="16" height="16" /> GitHub</a></li>
-  </ul>
-  <!--/.social--></aside>
-</div>
-<!--/.topbar-inner--></div>
-<!--/.area_hd--></header>
+  <ul class="social nav navbar-nav navbar-right">
+    <li><a href="https://twitter.com/seckie_"><img src="<?php echo get_stylesheet_directory_uri(); ?>/libs/social-media-icons/16px/twitter.png" alt="" width="16" height="16" /> Twitter</a></li>
+    <li><a href="https://www.facebook.com/profile.php?id=100001227105896"><img src="<?php echo get_stylesheet_directory_uri(); ?>/libs/social-media-icons/16px/facebook.png" alt="" width="16" height="16" /> Facebook</a></li>
+    <li><a href="https://github.com/seckie"><img src="<?php echo get_stylesheet_directory_uri(); ?>/libs/social-media-icons/16px/github.png" alt="" width="16" height="16" /> GitHub</a></li>
+  <!--./social--></ul>
+<!--/.navbar-collapse--></div>
+<!--/.container-fluid--></div>
+<!--/.navbar--></nav>
 
 <?php
 // Function from wordress.org
