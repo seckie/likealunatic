@@ -12,7 +12,7 @@ $current_layout = $options['theme_layout'];
 
 if ( 'content' != $current_layout ) :
 ?>
-    <div id="secondary" class="span4 widget-area" role="complementary">
+    <div id="secondary" class="col-md-4 col-xs-12 widget-area" role="complementary">
       <?php if ( ! dynamic_sidebar( 'sidebar-1' ) ) : ?>
 
         <aside id="archives" class="widget">
@@ -32,5 +32,5 @@ if ( 'content' != $current_layout ) :
         </aside>
 
       <?php endif; // end sidebar widget area ?>
-    </div><!-- #secondary .widget-area -->
+    <!--/#secondary .widget-area--></div>
 <?php endif; ?>

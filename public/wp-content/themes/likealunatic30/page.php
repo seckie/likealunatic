@@ -15,8 +15,7 @@
 get_header(); ?>
 
 <div class="container area_bd">
-
-    <div id="primary">
+    <div class="col-md-12" id="primary">
       <div id="content" role="main">
 
         <?php while ( have_posts() ) : the_post(); ?>
@@ -27,8 +26,8 @@ get_header(); ?>
 
         <?php endwhile; // end of the loop. ?>
 
-      </div><!-- #content -->
-    </div><!-- #primary -->
+      <!--/#content--></div>
+    <!--/#primary--></div>
 
 <!--/.container area_bd--></div>
 <?php get_footer(); ?>

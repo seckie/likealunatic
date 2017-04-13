@@ -15,8 +15,8 @@
 get_header(); ?>
 
 <div class="container area_bd">
-<div class="row">
-    <div class="span12" id="primary">
+  <div class="row">
+    <div class="col-md-8 col-xs-12" id="primary">
       <div id="content" role="main">
 
       <?php if ( have_posts() ) : ?>
@@ -47,11 +47,11 @@ get_header(); ?>
 
       <?php endif; ?>
 
-      </div><!-- #content -->
-    </div><!-- #primary -->
+      <!--./#content--></div>
+    <!--./#primary--></div>
 
 <?php get_sidebar(); ?>
 
-<!--/.row--></div>
+  <!--/.row--></div>
 <!--/.container area_bd--></div>
 <?php get_footer(); ?>
