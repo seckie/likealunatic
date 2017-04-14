@@ -8,6 +8,7 @@ var jshint = require('gulp-jshint');
 var notify = require('gulp-notify');
 var sass = require('gulp-sass');
 var browserSync = require('browser-sync').create();
+var plumber = require('gulp-plumber');
 // node native modules
 var path = require('path');
 // utility
@@ -30,31 +31,27 @@ var PATHS = {
 };
 
 // methods
-function errorHandler () {
-  // @param error
-  var args = Array.prototype.slice.call(arguments);
-  notify.onError({
-    title: 'Compile Error',
-    message: '<%= error %>',
-    sound: false
-  }).apply(this, args);
-  this.emit('end');
+function errorHandler (err, stats) {
+  if (err || (stats && stats.compilation.errors.length > 0)) {
+    const error = err || stats.compilation.errors[0].error;
+    notify.onError({ message: '<%= error.message %>' })(error);
+  }
 };
 
 // build CSS
 gulp.task('sass', function () {
   return gulp.src(PATHS.sass)
-    .pipe(sass({
-      outputStyle: 'expanded'
-    }).on('error', errorHandler))
+    .pipe(plumber({ errorHandler: errorHandler }))
+    .pipe(sass({ outputStyle: 'expanded' }))
     .pipe(gulp.dest(PATHS.cssDir))
     .pipe(browserSync.stream());
 });
 
 // build JavaScript
 gulp.task('jshint', function () {
-  return gulp.src(PATHS.jsSrc)
-    .pipe(jshint().on('error', errorHandler))
+  return gulp.src(PATHS.jsSrc.concat(['./gulpfile.js']))
+    .pipe(plumber({ errorHandler: errorHandler }))
+    .pipe(jshint())
     .pipe(jshint.reporter('default'));
 });
 
@@ -74,7 +71,7 @@ var WEBPACK_OPT = {
 };
 gulp.task('build', function () {
   return gulp.src(PATHS.jsSrcMain)
-    .pipe(gulpWebpack(WEBPACK_OPT))
+    .pipe(gulpWebpack(WEBPACK_OPT, null, errorHandler))
     .pipe(gulp.dest(PATHS.jsDir))
     .pipe(browserSync.stream());
 });
@@ -100,7 +97,7 @@ var WEBPACK_COMPRESS_OPT = {
 gulp.task('compress', function () {
   var opt = Object.assign({}, WEBPACK_OPT, WEBPACK_COMPRESS_OPT);
   return gulp.src(PATHS.jsSrcMain)
-    .pipe(gulpWebpack(opt))
+    .pipe(gulpWebpack(opt, null, errorHandler))
     .pipe(gulp.dest(PATHS.jsDir))
     .pipe(browserSync.stream());
 });
