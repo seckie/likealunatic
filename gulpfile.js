@@ -4,19 +4,17 @@ var gulp = require('gulp');
 var gutil = require('gulp-util');
 var webpack = require('webpack');
 var gulpWebpack = require('gulp-webpack');
-var jshint = require('gulp-jshint');
+var eslint = require('gulp-eslint');
 var notify = require('gulp-notify');
 var sass = require('gulp-sass');
 var browserSync = require('browser-sync').create();
-// node native modules
-var path = require('path');
-// utility
-var _ = require('lodash');
+var plumber = require('gulp-plumber');
 
 // constants
 var PUBLIC_PATH = 'public/';
 var WP_THEME_PATH = 'public/wp-content/themes/likealunatic30/';
 var SRC_PATH = './src/';
+var GULPFILE_PATH = './gulpfile.js';
 var PATHS = {
   jsSrc: [SRC_PATH + 'js/**/*.js'],
   jsSrcMain: SRC_PATH + 'js/main.js',
@@ -30,32 +28,28 @@ var PATHS = {
 };
 
 // methods
-function errorHandler () {
-  // @param error
-  var args = Array.prototype.slice.call(arguments);
-  notify.onError({
-    title: 'Compile Error',
-    message: '<%= error %>',
-    sound: false
-  }).apply(this, args);
-  this.emit('end');
-};
+function errorHandler (err, stats) {
+  if (err || (stats && stats.compilation.errors.length > 0)) {
+    const error = err || stats.compilation.errors[0].error;
+    notify.onError({ message: '<%= error.message %>' })(error);
+  }
+}
 
 // build CSS
 gulp.task('sass', function () {
   return gulp.src(PATHS.sass)
-    .pipe(sass({
-      outputStyle: 'expanded'
-    }).on('error', errorHandler))
+    .pipe(plumber({ errorHandler: errorHandler }))
+    .pipe(sass({ outputStyle: 'expanded' }))
     .pipe(gulp.dest(PATHS.cssDir))
     .pipe(browserSync.stream());
 });
 
 // build JavaScript
-gulp.task('jshint', function () {
-  return gulp.src(PATHS.jsSrc)
-    .pipe(jshint().on('error', errorHandler))
-    .pipe(jshint.reporter('default'));
+gulp.task('eslint', function () {
+  return gulp.src(PATHS.jsSrc.concat([GULPFILE_PATH]))
+    .pipe(eslint())
+    .pipe(eslint.format())
+    .pipe(eslint.failAfterError());
 });
 
 // webpack
@@ -74,7 +68,7 @@ var WEBPACK_OPT = {
 };
 gulp.task('build', function () {
   return gulp.src(PATHS.jsSrcMain)
-    .pipe(gulpWebpack(WEBPACK_OPT))
+    .pipe(gulpWebpack(WEBPACK_OPT, null, errorHandler))
     .pipe(gulp.dest(PATHS.jsDir))
     .pipe(browserSync.stream());
 });
@@ -100,7 +94,7 @@ var WEBPACK_COMPRESS_OPT = {
 gulp.task('compress', function () {
   var opt = Object.assign({}, WEBPACK_OPT, WEBPACK_COMPRESS_OPT);
   return gulp.src(PATHS.jsSrcMain)
-    .pipe(gulpWebpack(opt))
+    .pipe(gulpWebpack(opt, null, errorHandler))
     .pipe(gulp.dest(PATHS.jsDir))
     .pipe(browserSync.stream());
 });
@@ -120,7 +114,7 @@ gulp.task('browser-sync', function () {
           msg += req.statusCode;
           msg += ' ';
           msg += req.statusMessage;
-          console.log(msg);
+          gutil.log(msg);
           next();
         }
       ]
@@ -132,9 +126,10 @@ gulp.task('browser-sync', function () {
 gulp.task('watch', function () {
   gutil.log('start watching');
   gulp.watch(PATHS.sass, ['sass']);
-  gulp.watch(PATHS.jsSrc, ['build']);
+  gulp.watch(PATHS.jsSrc, ['eslint', 'build']);
+  gulp.watch([GULPFILE_PATH], ['eslint']);
 });
 
 // commands
-gulp.task('default', ['browser-sync', 'sass', 'watch']);
+gulp.task('default', ['browser-sync', 'sass', 'eslint', 'watch']);
 

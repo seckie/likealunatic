@@ -15,34 +15,25 @@
 get_header(); ?>
 
 <div class="container area_bd">
-<div class="row">
-	
-		<div class="span12" id="primary">
-			<div id="content" role="main">
+  <div class="row">
+    <div class="col-md-8 col-xs-12" id="primary">
+      <div id="content" role="main">
+      <?php
+        $temp_query = clone $wp_query;
+        query_posts('posts_per_page=5');
+      ?>
+      <?php if ( have_posts() ) : ?>
+        <?php while ( have_posts() ) : the_post(); ?>
+          <?php get_template_part( 'content', 'blog' ); ?>
+        <?php endwhile; ?>
+      <?php endif; ?>
+      <?php $wp_query = clone $temp_query; ?>
 
-			<?php
-				$temp_query = clone $wp_query;
-				query_posts('posts_per_page=5');
-			?>
-			<?php if ( have_posts() ) : ?>
-
-				<?php /* Start the Loop */ ?>
-				<?php while ( have_posts() ) : the_post(); ?>
-
-					<?php get_template_part( 'content', 'blog' ); ?>
-
-				<?php endwhile; ?>
-
-				<?php likealunatic30_content_nav( 'nav-below' ); ?>
-
-			<?php endif; ?>
-			<?php $wp_query = clone $temp_query; ?>
-
-			</div><!-- #content -->
-		</div><!-- #primary -->
+      <!--/#content--></div>
+    <!--/#primary--></div>
 
 <?php get_sidebar(); ?>
 
-<!--/.row--></div>
+  <!--/.row--></div>
 <!--/.container area_bd--></div>
 <?php get_footer(); ?>

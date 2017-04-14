@@ -3,8 +3,8 @@ wp-*.php
 wp-includes
 wp-admin
 xmlrpc.php
+wp-content/languages
 wp-content/plugins
 wp-content/uploads
 wp-content/upgrade
 wp-content/themes/twenty*
-libs
