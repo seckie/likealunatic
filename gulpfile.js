@@ -4,7 +4,7 @@ var gulp = require('gulp');
 var gutil = require('gulp-util');
 var webpack = require('webpack');
 var gulpWebpack = require('gulp-webpack');
-var jshint = require('gulp-jshint');
+var eslint = require('gulp-eslint');
 var notify = require('gulp-notify');
 var sass = require('gulp-sass');
 var browserSync = require('browser-sync').create();
@@ -14,6 +14,7 @@ var plumber = require('gulp-plumber');
 var PUBLIC_PATH = 'public/';
 var WP_THEME_PATH = 'public/wp-content/themes/likealunatic30/';
 var SRC_PATH = './src/';
+var GULPFILE_PATH = './gulpfile.js';
 var PATHS = {
   jsSrc: [SRC_PATH + 'js/**/*.js'],
   jsSrcMain: SRC_PATH + 'js/main.js',
@@ -44,11 +45,11 @@ gulp.task('sass', function () {
 });
 
 // build JavaScript
-gulp.task('jshint', function () {
-  return gulp.src(PATHS.jsSrc.concat(['./gulpfile.js']))
-    .pipe(plumber({ errorHandler: errorHandler }))
-    .pipe(jshint())
-    .pipe(jshint.reporter('default'));
+gulp.task('eslint', function () {
+  return gulp.src(PATHS.jsSrc.concat([GULPFILE_PATH]))
+    .pipe(eslint())
+    .pipe(eslint.format())
+    .pipe(eslint.failAfterError());
 });
 
 // webpack
@@ -113,7 +114,7 @@ gulp.task('browser-sync', function () {
           msg += req.statusCode;
           msg += ' ';
           msg += req.statusMessage;
-          console.log(msg);
+          gutil.log(msg);
           next();
         }
       ]
@@ -125,9 +126,10 @@ gulp.task('browser-sync', function () {
 gulp.task('watch', function () {
   gutil.log('start watching');
   gulp.watch(PATHS.sass, ['sass']);
-  gulp.watch(PATHS.jsSrc, ['build']);
+  gulp.watch(PATHS.jsSrc, ['eslint', 'build']);
+  gulp.watch([GULPFILE_PATH], ['eslint']);
 });
 
 // commands
-gulp.task('default', ['browser-sync', 'sass', 'watch']);
+gulp.task('default', ['browser-sync', 'sass', 'eslint', 'watch']);
 
