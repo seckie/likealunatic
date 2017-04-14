@@ -219,6 +219,10 @@ article.post .entry-title {
   line-height: 36px;
 }
 
+article.post .entry-content {
+  line-height: 1.66;
+}
+
 article.post h2 {
   margin-bottom: 9px;
   font-size: 20px;
@@ -338,6 +342,10 @@ article.post .alignright {
 
 .tagcloud {
   padding-bottom: 18px;
+}
+
+.pagination {
+  display: block;
 }
 
 .pagination:after {
