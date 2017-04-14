@@ -42,7 +42,7 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	/**
@@ -55,7 +55,11 @@
 	 * @since      2012-01-02
 	 */
 
-	var STYLESHEET_DIRECTORY = window.STYLESHEET_DIRECTORY || '';
+	var _TwitterUserTimeline = __webpack_require__(1);
+
+	var _TwitterUserTimeline2 = _interopRequireDefault(_TwitterUserTimeline);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	// add CSS rule to hide default contents
 	var mysheet = document.styleSheets[0];
@@ -68,77 +72,6 @@
 	}
 
 	/**
-	 * Twitter user timeline list
-	 */
-
-	var TwitterUserTimeline = function TwitterUserTimeline(options) {
-	  // extend default options
-	  this.opt = {
-	    jsonURL: '',
-	    el: document.body,
-	    complete: function complete() {}
-	  };
-	  $.extend(this.opt, options);
-	  this.$el = $(this.opt.el);
-	  // initialize
-	  this.initialize();
-	};
-	TwitterUserTimeline.prototype = {
-	  initialize: function initialize() {
-	    var self = this;
-	    this.count = 0;
-
-	    $.ajax(this.opt.jsonURL, {
-	      success: function success(data) {
-	        var html = '';
-	        if (typeof data === 'string') {
-	          data = $.parseJSON(data);
-	        }
-	        //console.log(data);
-	        for (var i = 0, l = data.length; i < l; i++) {
-	          html += self.buldItem(data[i]);
-	        }
-	        self.$el.html(html);
-	        self.opt.complete();
-	      }
-	    });
-	  },
-	  buldItem: function buldItem(data) {
-	    var text = data.text;
-	    text = this.createURLLink(text);
-	    text = this.createReplyLink(text);
-	    text = this.createTagLink(text);
-	    var isInstagram = function isInstagram() {
-	      return (/Instagram/.test(data.source)
-	      );
-	    };
-	    var iconName = isInstagram() ? 'instagram' : 'twitter';
-	    var iconAlt = isInstagram() ? 'Instagram' : 'Twitter';
-	    var html = '\n    <div class="tweet tweet' + this.count + '">\n      <div class="img">\n        <a href="http://twitter.com/' + data.user.screen_name + '" target="_blank">\n          <img src="' + STYLESHEET_DIRECTORY + '/libs/social-media-icons/32px/' + iconName + '.png" alt="' + iconAlt + '" width="32" height="32" />\n        </a>\n      </div>\n      <div class="content">\n        <div class="contentInner">\n          <div class="contentInner2">\n            <p class="text">' + text + '</p>\n            <div class="footer">\n              <p class="author">\n                <a target="_blank" href="http://twitter.com/' + data.user.screen_name + '">\n                  ' + data.user.screen_name + '</a>\n              </p>\n              <p class="date">\n                <a href="http://twitter.com/' + data.user.screen_name + '/status/' + data.id + '" target="_blank">\n                [' + this.convertTime(data.created_at) + ']</a>\n              </p>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n    ';
-	    this.count++;
-	    return html;
-	  },
-	  convertTime: function convertTime(timestr) {
-	    //        var d = new Date(timestr);
-	    //        d.setHours(d.getHours() + 9);
-	    //        return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDay() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
-	    return timestr;
-	  },
-	  createURLLink: function createURLLink(text) {
-	    text = text.replace(/(https?:\/\/[a-zA-Z0-9\-_\.\/]+)/, '<a href="$1" target="_blank">$1</a>');
-	    return text;
-	  },
-	  createReplyLink: function createReplyLink(text) {
-	    text = text.replace(/@([\w_]+)/, '<a href="http://twitter.com/$1" target="_blank">@$1</a>');
-	    return text;
-	  },
-	  createTagLink: function createTagLink(text) {
-	    text = text.replace(/#([\w_]+)/, '<a href="http://twitter.com/#search?q=%23$1" target="_blank">#$1</a>');
-	    return text;
-	  }
-	};
-
-	/**
 	 * dom ready
 	 */
 	$(function () {
@@ -146,7 +79,7 @@
 	  var $container = $('div.area_bd').find('div.contents-index');
 
 	  // Twitter user timeline
-	  new TwitterUserTimeline({
+	  new _TwitterUserTimeline2.default({
 	    el: '.tweets-contents',
 	    jsonURL: '/api/get_user_tl.php',
 	    complete: function complete() {
@@ -269,6 +202,96 @@
 	    newContainer.insertBefore(this);
 	  });
 	};
+
+/***/ },
+/* 1 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var STYLESHEET_DIRECTORY = window.STYLESHEET_DIRECTORY || '';
+
+	/**
+	 * Twitter user timeline list
+	 */
+
+	var TwitterUserTimeline = function () {
+	  function TwitterUserTimeline(_ref) {
+	    var _ref$jsonURL = _ref.jsonURL,
+	        jsonURL = _ref$jsonURL === undefined ? '' : _ref$jsonURL,
+	        _ref$el = _ref.el,
+	        el = _ref$el === undefined ? document.body : _ref$el,
+	        _ref$complete = _ref.complete,
+	        complete = _ref$complete === undefined ? function () {} : _ref$complete;
+
+	    _classCallCheck(this, TwitterUserTimeline);
+
+	    this.opt = { jsonURL: jsonURL, el: el, complete: complete };
+	    this.$el = $(this.opt.el);
+	    this.initialize();
+	  }
+
+	  _createClass(TwitterUserTimeline, [{
+	    key: 'initialize',
+	    value: function initialize() {
+	      var _this = this;
+
+	      $.ajax(this.opt.jsonURL, {
+	        success: function success(data) {
+	          var dataset = typeof data === 'string' ? JSON.parse(data) : data;
+	          var html = dataset.reduce(function (str, current, i) {
+	            return str + _this.buildItem(current, i);
+	          }, '');
+	          _this.$el.html(html);
+	          _this.opt.complete();
+	        }
+	      });
+	    }
+	  }, {
+	    key: 'buildItem',
+	    value: function buildItem(data, i) {
+	      var text = data.text;
+	      text = this.createURLLink(text);
+	      text = this.createReplyLink(text);
+	      text = this.createTagLink(text);
+	      var isInstagram = function isInstagram() {
+	        return (/Instagram/.test(data.source)
+	        );
+	      };
+	      var iconName = isInstagram() ? 'instagram' : 'twitter';
+	      var iconAlt = isInstagram() ? 'Instagram' : 'Twitter';
+	      var html = '\n    <div class="tweet tweet' + i + '">\n      <div class="img">\n        <a href="http://twitter.com/' + data.user.screen_name + '" target="_blank">\n          <img src="' + STYLESHEET_DIRECTORY + '/libs/social-media-icons/32px/' + iconName + '.png" alt="' + iconAlt + '" width="32" height="32" />\n        </a>\n      </div>\n      <div class="content">\n        <div class="contentInner">\n          <div class="contentInner2">\n            <p class="text">' + text + '</p>\n            <div class="footer">\n              <p class="author">\n                <a target="_blank" href="http://twitter.com/' + data.user.screen_name + '">\n                  ' + data.user.screen_name + '</a>\n              </p>\n              <p class="date">\n                <a href="http://twitter.com/' + data.user.screen_name + '/status/' + data.id + '" target="_blank">\n                [' + data.created_at + ']</a>\n              </p>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n    ';
+	      return html;
+	    }
+	  }, {
+	    key: 'createURLLink',
+	    value: function createURLLink(text) {
+	      return text.replace(/(https?:\/\/[a-zA-Z0-9\-_\.\/]+)/, '<a href="$1" target="_blank">$1</a>');
+	    }
+	  }, {
+	    key: 'createReplyLink',
+	    value: function createReplyLink(text) {
+	      return text.replace(/@([\w_]+)/, '<a href="http://twitter.com/$1" target="_blank">@$1</a>');
+	    }
+	  }, {
+	    key: 'createTagLink',
+	    value: function createTagLink(text) {
+	      return text.replace(/#([\w_]+)/, '<a href="http://twitter.com/#search?q=%23$1" target="_blank">#$1</a>');
+	    }
+	  }]);
+
+	  return TwitterUserTimeline;
+	}();
+
+	exports.default = TwitterUserTimeline;
 
 /***/ }
 /******/ ]);

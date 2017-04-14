@@ -9,7 +9,7 @@
  * @since      2012-01-02
  */
 
-const STYLESHEET_DIRECTORY = window.STYLESHEET_DIRECTORY || '';
+import TwitterUserTimeline from './TwitterUserTimeline.js';
 
 // add CSS rule to hide default contents
 var mysheet = document.styleSheets[0];
@@ -19,101 +19,6 @@ if (mysheet.insertRule) {
 } else if (mysheet.addRule) { //for msie
   mysheet.addRule('div.contents-index', 'visibility: hidden');
 }
-
-/**
- * Twitter user timeline list
- */
-
-var TwitterUserTimeline = function (options) {
-  // extend default options
-  this.opt = {
-    jsonURL: '',
-    el: document.body,
-    complete: function () {}
-  };
-  $.extend(this.opt, options);
-  this.$el = $(this.opt.el);
-  // initialize
-  this.initialize();
-};
-TwitterUserTimeline.prototype = {
-  initialize: function () {
-    var self = this;
-    this.count = 0;
-
-    $.ajax(this.opt.jsonURL, {
-      success: function (data) {
-        var html = '';
-        if (typeof data === 'string') {
-          data = $.parseJSON(data);
-        }
-        //console.log(data);
-        for (var i=0,l=data.length; i<l ; i++) {
-          html += self.buldItem(data[i]);
-        }
-        self.$el.html(html);
-        self.opt.complete();
-      }
-    });
-  },
-  buldItem: function (data) {
-    let text = data.text;
-    text = this.createURLLink(text);
-    text = this.createReplyLink(text);
-    text = this.createTagLink(text);
-    const isInstagram = () => /Instagram/.test(data.source);
-    const iconName = isInstagram() ? 'instagram' : 'twitter';
-    const iconAlt = isInstagram() ? 'Instagram' : 'Twitter';
-    const html = `
-    <div class="tweet tweet${this.count}">
-      <div class="img">
-        <a href="http://twitter.com/${data.user.screen_name}" target="_blank">
-          <img src="${STYLESHEET_DIRECTORY}/libs/social-media-icons/32px/${iconName}.png" alt="${iconAlt}" width="32" height="32" />
-        </a>
-      </div>
-      <div class="content">
-        <div class="contentInner">
-          <div class="contentInner2">
-            <p class="text">${text}</p>
-            <div class="footer">
-              <p class="author">
-                <a target="_blank" href="http://twitter.com/${data.user.screen_name}">
-                  ${data.user.screen_name}</a>
-              </p>
-              <p class="date">
-                <a href="http://twitter.com/${data.user.screen_name}/status/${data.id}" target="_blank">
-                [${this.convertTime(data.created_at)}]</a>
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    `;
-    this.count ++;
-    return html;
-  },
-  convertTime: function (timestr) {
-    //        var d = new Date(timestr);
-    //        d.setHours(d.getHours() + 9);
-    //        return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDay() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
-    return timestr;
-  },
-  createURLLink: function (text) {
-    text = text.replace(/(https?:\/\/[a-zA-Z0-9\-_\.\/]+)/, '<a href="$1" target="_blank">$1</a>');
-    return text;
-  },
-  createReplyLink: function (text) {
-    text = text.replace(/@([\w_]+)/, '<a href="http://twitter.com/$1" target="_blank">@$1</a>');
-    return text;
-  },
-  createTagLink: function (text) {
-    text = text.replace(/#([\w_]+)/, '<a href="http://twitter.com/#search?q=%23$1" target="_blank">#$1</a>');
-    return text;
-  }
-};
-
-
 
 /**
  * dom ready
