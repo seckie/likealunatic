@@ -15,9 +15,9 @@ const STYLESHEET_DIRECTORY = window.STYLESHEET_DIRECTORY || '';
 var mysheet = document.styleSheets[0];
 var totalrules = mysheet.cssRules ? mysheet.cssRules.length : mysheet.rules.length;
 if (mysheet.insertRule) {
-  mysheet.insertRule("div.contents-index {visibility: hidden}", totalrules);
+  mysheet.insertRule('div.contents-index {visibility: hidden}', totalrules);
 } else if (mysheet.addRule) { //for msie
-  mysheet.addRule("div.contents-index", "visibility: hidden");
+  mysheet.addRule('div.contents-index', 'visibility: hidden');
 }
 
 /**
@@ -35,7 +35,7 @@ var TwitterUserTimeline = function (options) {
   this.$el = $(this.opt.el);
   // initialize
   this.initialize();
-}
+};
 TwitterUserTimeline.prototype = {
   initialize: function () {
     var self = this;
@@ -47,7 +47,7 @@ TwitterUserTimeline.prototype = {
         if (typeof data === 'string') {
           data = $.parseJSON(data);
         }
-        console.log(data);
+        //console.log(data);
         for (var i=0,l=data.length; i<l ; i++) {
           html += self.buldItem(data[i]);
         }
@@ -57,7 +57,7 @@ TwitterUserTimeline.prototype = {
     });
   },
   buldItem: function (data) {
-    let text = data.text
+    let text = data.text;
     text = this.createURLLink(text);
     text = this.createReplyLink(text);
     text = this.createTagLink(text);
@@ -178,11 +178,11 @@ $(function () {
       show: false
     });
     // preload img
-    const $img = preloadImg(this.href);
+    preloadImg(this.href);
 
     // bind event
     $(trigger).on('click', function (e) {
-      $box.modal('toggle')
+      $box.modal('toggle');
       //layoutModal($box, $img);
       e.preventDefault();
     });
@@ -200,6 +200,7 @@ $(function () {
     wrapper.appendTo(document.body);
     return img;
   }
+  /*
   function layoutModal($box, $img) {
     var imgWidth = $img.width();
     var imgHeight = $img.height();
@@ -219,7 +220,7 @@ $(function () {
       'margin-left': -1 * (imgWidth + 30) / 2
     });
   }
-
+  */
 });
 
 /**

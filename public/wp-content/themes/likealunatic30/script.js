@@ -61,10 +61,10 @@
 	var mysheet = document.styleSheets[0];
 	var totalrules = mysheet.cssRules ? mysheet.cssRules.length : mysheet.rules.length;
 	if (mysheet.insertRule) {
-	  mysheet.insertRule("div.contents-index {visibility: hidden}", totalrules);
+	  mysheet.insertRule('div.contents-index {visibility: hidden}', totalrules);
 	} else if (mysheet.addRule) {
 	  //for msie
-	  mysheet.addRule("div.contents-index", "visibility: hidden");
+	  mysheet.addRule('div.contents-index', 'visibility: hidden');
 	}
 
 	/**
@@ -94,7 +94,7 @@
 	        if (typeof data === 'string') {
 	          data = $.parseJSON(data);
 	        }
-	        console.log(data);
+	        //console.log(data);
 	        for (var i = 0, l = data.length; i < l; i++) {
 	          html += self.buldItem(data[i]);
 	        }
@@ -187,7 +187,7 @@
 	      show: false
 	    });
 	    // preload img
-	    var $img = preloadImg(this.href);
+	    preloadImg(this.href);
 
 	    // bind event
 	    $(trigger).on('click', function (e) {
@@ -209,25 +209,25 @@
 	    wrapper.appendTo(document.body);
 	    return img;
 	  }
+	  /*
 	  function layoutModal($box, $img) {
 	    var imgWidth = $img.width();
 	    var imgHeight = $img.height();
 	    var winHeight = $(window).height();
-
-	    // when a large image overflow from window
+	     // when a large image overflow from window
 	    if (winHeight < imgHeight + 30) {
 	      $box.css({
 	        'position': 'absolute',
-	        'top': (document.documentElement.scrollTop || document.body.scrollTop) + winHeight / 2
+	        'top': (document.documentElement.scrollTop || document.body.scrollTop) + (winHeight / 2)
 	      });
 	    }
-
-	    $box.css({
+	     $box.css({
 	      'width': imgWidth + 30,
 	      'margin-top': -1 * Math.min(winHeight / 2, (imgHeight + 60) / 2),
 	      'margin-left': -1 * (imgWidth + 30) / 2
 	    });
 	  }
+	  */
 	});
 
 	/**
