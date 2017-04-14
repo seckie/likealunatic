@@ -206,10 +206,15 @@ pre code {
 /* overwrite "twentyeleven" theme
  * ----------------------------------------*/
 article.post {
-  margin-bottom: 60px;
+  overflow: hidden;
+}
+
+article.post + article.post {
+  margin-top: 36px;
 }
 
 article.post .entry-title {
+  margin: 0;
   font-size: 24px;
   line-height: 36px;
 }
@@ -251,14 +256,6 @@ article.post .alignright {
   margin-left: 10px;
 }
 
-#respond {
-  padding-top: 50px;
-}
-
-#comments {
-  margin-top: 24px;
-}
-
 #commentform p {
   position: relative;
 }
@@ -284,12 +281,16 @@ article.post .alignright {
 }
 
 .commentlist {
-  margin-left: 0;
-  margin-bottom: 36px;
+  margin: 24px 0 36px;
 }
 
 .commentlist li {
   list-style-type: none;
+}
+
+.commentlist .comment {
+  overflow: hidden;
+  margin-bottom: 24px;
 }
 
 .commentlist .comment:after {
@@ -347,8 +348,25 @@ article.post .alignright {
 
 .pagination .prev {
   float: left;
+  max-width: 50%;
 }
 
 .pagination .next {
   float: right;
+  max-width: 50%;
+}
+
+@media screen and (max-width: 767px) {
+  .area_bd {
+    width: 100%;
+    padding: 30px 15px;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+  article.post iframe,
+  article.post img,
+  article.post svg {
+    max-width: 100%;
+    height: auto;
+  }
 }

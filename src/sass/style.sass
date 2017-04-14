@@ -162,8 +162,11 @@ pre code
  * ----------------------------------------*/
 
 article.post
-  margin-bottom: 60px
+  overflow: hidden
+  + article.post
+    margin-top: 36px
   .entry-title
+    margin: 0
     font-size: 24px
     line-height: 36px
   h2
@@ -188,12 +191,6 @@ article.post
     float: right
     margin-left: 10px
 
-#respond
-  padding-top: 40px + 10px
-
-#comments
-  margin-top: 24px
-
 #commentform
   p
     position: relative
@@ -211,11 +208,12 @@ article.post
     top: .5em
     left: 133px
 .commentlist
-  margin-left: 0
-  margin-bottom: 36px
+  margin: 24px 0 36px
   li
     list-style-type: none
   .comment
+    overflow: hidden
+    margin-bottom: 24px
     +clearfix
   .comment-author
     .photo
@@ -245,6 +243,27 @@ article.post
   @include clearfix
   .prev
     float: left
+    max-width: 50%
   .next
     float: right
+    max-width: 50%
+
+
+@media screen and (max-width: 767px)
+  .area_bd
+    width: 100%
+    padding: 30px 15px
+    box-sizing: border-box
+    overflow: hidden
+  //.container > .row
+  //  width: 100%
+  //  box-sizing: border-box
+  //  padding: 0 0 0 15px
+  article.post
+    iframe,
+    img,
+    svg
+      max-width: 100%
+      height: auto
+
 
