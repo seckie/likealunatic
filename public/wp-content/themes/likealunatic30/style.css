@@ -64,8 +64,8 @@ pre code {
   vertical-align: -1px;
 }
 
-.box, .area_bd .contents-index article,
-.area_bd .contents-index .tweet {
+.box, .contents-index article,
+.contents-index .tweet {
   float: left;
   width: 220px;
   margin: 0 0 15px;
@@ -86,72 +86,72 @@ pre code {
   padding-bottom: 30px;
 }
 
-.area_bd .contents-index:after {
+.contents-index:after {
   content: "";
   display: block;
   clear: both;
 }
 
-.area_bd .contents-index ul {
+.contents-index ul {
   margin: 0;
 }
 
-.area_bd .contents-index article h3,
-.area_bd .contents-index .tweet h3 {
+.contents-index article h3,
+.contents-index .tweet h3 {
   margin: 0;
   font-size: 14px;
   line-height: 1.21;
 }
 
-.area_bd .contents-index article h3 img,
-.area_bd .contents-index .tweet h3 img {
+.contents-index article h3 img,
+.contents-index .tweet h3 img {
   float: left;
   margin: 1px 10px 4px 0;
   vertical-align: top;
 }
 
-.area_bd .contents-index article .summary,
-.area_bd .contents-index .tweet .summary {
+.contents-index article .summary,
+.contents-index .tweet .summary {
   clear: both;
   overflow: hidden;
 }
 
-.area_bd .contents-index article footer,
-.area_bd .contents-index .tweet footer {
+.contents-index article footer,
+.contents-index .tweet footer {
   clear: both;
   padding-top: 8px;
 }
 
-.area_bd .contents-index article footer p,
-.area_bd .contents-index .tweet footer p {
+.contents-index article footer p,
+.contents-index .tweet footer p {
   display: inline-block;
   font-size: 11px;
   margin: 0;
 }
 
-.area_bd .contents-index article footer p.categories,
-.area_bd .contents-index .tweet footer p.categories {
+.contents-index article footer p.categories,
+.contents-index .tweet footer p.categories {
   margin-right: 1em;
 }
 
-.area_bd .contents-index .img {
+.contents-index .img {
   float: left;
   margin: 0 10px 4px 0;
 }
 
-.area_bd .contents-index .footer {
+.contents-index .footer {
   clear: both;
   padding-top: 8px;
   border-top: 1px solid #EEEEEE;
 }
 
-.area_bd .contents-index .footer p {
+.contents-index .footer p {
   display: inline-block;
   margin: 0;
   font-size: 11px;
 }
 
-.area_bd .contents-index .footer p.author {
+.contents-index .footer p.author {
   margin-right: 1em;
 }
 
@@ -206,10 +206,15 @@ pre code {
 /* overwrite "twentyeleven" theme
  * ----------------------------------------*/
 article.post {
-  margin-bottom: 60px;
+  overflow: hidden;
+}
+
+article.post + article.post {
+  margin-top: 36px;
 }
 
 article.post .entry-title {
+  margin: 0;
   font-size: 24px;
   line-height: 36px;
 }
@@ -251,14 +256,6 @@ article.post .alignright {
   margin-left: 10px;
 }
 
-#respond {
-  padding-top: 50px;
-}
-
-#comments {
-  margin-top: 24px;
-}
-
 #commentform p {
   position: relative;
 }
@@ -284,12 +281,16 @@ article.post .alignright {
 }
 
 .commentlist {
-  margin-left: 0;
-  margin-bottom: 36px;
+  margin: 24px 0 36px;
 }
 
 .commentlist li {
   list-style-type: none;
+}
+
+.commentlist .comment {
+  overflow: hidden;
+  margin-bottom: 24px;
 }
 
 .commentlist .comment:after {
@@ -347,8 +348,32 @@ article.post .alignright {
 
 .pagination .prev {
   float: left;
+  max-width: 50%;
 }
 
 .pagination .next {
   float: right;
+  max-width: 50%;
+}
+
+@media screen and (max-width: 767px) {
+  .area_bd {
+    width: 100%;
+    padding: 30px 15px;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+  article.post iframe,
+  article.post img,
+  article.post svg {
+    max-width: 100%;
+    height: auto;
+  }
+  .box, .contents-index article,
+  .contents-index .tweet {
+    width: 100%;
+  }
+  .contents-index .tweet {
+    width: 100%;
+  }
 }

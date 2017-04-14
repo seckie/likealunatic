@@ -51,9 +51,15 @@
 <nav class="navbar navbar-inverse area_hd">
 <div class="container-fluid">
 <div class="navbar-header">
+  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
+    <span class="sr-only">Toggle navigation</span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+  </button>
   <a class="navbar-brand" href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a>
 <!--/.navbar-header--></div>
-<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+<div class="collapse navbar-collapse" id="navbar-collapse">
   <ul class="nav navbar-nav">
     <li<?php if (is_home()) { ?> class="active"<?php } ?>><a href="<?php bloginfo('url'); ?>/">Home</a></li>
     <li<?php if (is_page('blog') || (!is_home() && !is_page())) { ?> class="active"<?php }?>><a href="<?php bloginfo('url'); ?>/blog/">Blog</a></li>
@@ -68,6 +74,7 @@
 <!--/.navbar-collapse--></div>
 <!--/.container-fluid--></div>
 <!--/.navbar--></nav>
+
 
 <?php
 // Function from wordress.org
