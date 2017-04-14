@@ -264,13 +264,13 @@ article.post .alignright {
 }
 
 #commentform input[type="text"] {
-  width: 270px;
-  margin-left: 15px;
+  width: 100%;
+  max-width: 270px;
 }
 
 #commentform textarea {
-  width: 510px;
-  margin-left: 15px;
+  width: 100%;
+  max-width: 510px;
 }
 
 #commentform .comment-notes .required {
