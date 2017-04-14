@@ -338,3 +338,17 @@ article.post .alignright {
 .tagcloud {
   padding-bottom: 18px;
 }
+
+.pagination:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.pagination .prev {
+  float: left;
+}
+
+.pagination .next {
+  float: right;
+}
