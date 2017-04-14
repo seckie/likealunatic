@@ -23,16 +23,9 @@ get_header(); ?>
         query_posts('posts_per_page=5');
       ?>
       <?php if ( have_posts() ) : ?>
-
-        <?php /* Start the Loop */ ?>
         <?php while ( have_posts() ) : the_post(); ?>
-
           <?php get_template_part( 'content', 'blog' ); ?>
-
         <?php endwhile; ?>
-
-        <?php likealunatic30_content_nav( 'nav-below' ); ?>
-
       <?php endif; ?>
       <?php $wp_query = clone $temp_query; ?>
 
