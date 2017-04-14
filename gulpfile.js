@@ -9,10 +9,6 @@ var notify = require('gulp-notify');
 var sass = require('gulp-sass');
 var browserSync = require('browser-sync').create();
 var plumber = require('gulp-plumber');
-// node native modules
-var path = require('path');
-// utility
-var _ = require('lodash');
 
 // constants
 var PUBLIC_PATH = 'public/';
@@ -36,7 +32,7 @@ function errorHandler (err, stats) {
     const error = err || stats.compilation.errors[0].error;
     notify.onError({ message: '<%= error.message %>' })(error);
   }
-};
+}
 
 // build CSS
 gulp.task('sass', function () {
