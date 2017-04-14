@@ -80,46 +80,47 @@ pre code
   .description
     margin: 0
     padding-bottom: 30px
-  .contents-index
-    +clearfix
-    ul
+
+.contents-index
+  +clearfix
+  ul
+    margin: 0
+  article,
+  .tweet
+    @extend .box
+    h3
       margin: 0
-    article,
-    .tweet
-      @extend .box
-      h3
-        margin: 0
-        font-size: 14px
-        line-height: 1.21
-        img
-          float: left
-          margin: 1px 10px 4px 0
-          vertical-align: top
-      .summary
-        clear: both
-        overflow: hidden
-      footer
-        clear: both
-        padding-top: 8px
-        p
-          display: inline-block
-          font-size: 11px
-          margin: 0
-          &.categories
-            margin-right: 1em
-    .img
-      float: left
-      margin: 0 10px 4px 0
-    .footer
+      font-size: 14px
+      line-height: 1.21
+      img
+        float: left
+        margin: 1px 10px 4px 0
+        vertical-align: top
+    .summary
+      clear: both
+      overflow: hidden
+    footer
       clear: both
       padding-top: 8px
-      border-top: 1px solid #EEEEEE
       p
         display: inline-block
-        margin: 0
         font-size: 11px
-        &.author
+        margin: 0
+        &.categories
           margin-right: 1em
+  .img
+    float: left
+    margin: 0 10px 4px 0
+  .footer
+    clear: both
+    padding-top: 8px
+    border-top: 1px solid #EEEEEE
+    p
+      display: inline-block
+      margin: 0
+      font-size: 11px
+      &.author
+        margin-right: 1em
 
 .tweets
   +clearfix
@@ -266,4 +267,9 @@ article.post
       max-width: 100%
       height: auto
 
+  .box
+    width: 100%
+  .contents-index
+    .tweet
+      width: 100%
 
