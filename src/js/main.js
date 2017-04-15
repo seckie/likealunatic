@@ -74,36 +74,44 @@ $(function () {
   </div>
 </div>
     `;
-    $box.html(content);
-    $box.appendTo(document.body);
-    // activate
-    $box.modal({
+    $box.html(content).appendTo(document.body).modal({
       backdrop: true,
       keyboard: true,
       show: false
     });
-    // preload img
-    preloadImg(this.href);
+
+    // preload image
+    preloadImg(this.href).then(($img) => {
+      const baseWidth = $img.width();
+      // set dialog width
+      const $modalBody = $box.find('.modal-body');
+      const hPadding = parseInt($modalBody.css('padding-left'), 10) + parseInt($modalBody.css('padding-right'), 10);
+      $box.find('.modal-dialog').width( baseWidth + hPadding );
+    });
 
     // bind event
-    $(trigger).on('click', function (e) {
-      $box.modal('toggle');
-      //layoutModal($box, $img);
+    $(trigger).on('click', (e) => {
       e.preventDefault();
+      $box.modal('toggle');
     });
   });
 
   function preloadImg(href) {
-    var wrapper = $('<div class="preload-wrapper"/>').css({
-      'width': 0,
-      'height': 0,
-      'overflow': 'hidden',
-      'position': 'absolute'
+    return new Promise((resolve, reject) => {
+      const $wrapper = $('<div class="preload-wrapper"/>').css({
+        'width': 0,
+        'height': 0,
+        'overflow': 'hidden',
+        'position': 'absolute'
+      });
+      const $img = $('<img src="' + href + '" alt="" />');
+      $img.css('visibility', 'hidden').appendTo($wrapper);
+      $wrapper.appendTo(document.body);
+      $img.on('load', (e) => {
+        resolve($img);
+        setTimeout(() => $wrapper.remove(), 500);
+      });
     });
-    var img = $('<img src="' + href + '" alt="" />');
-    img.hideVisibility().appendTo(wrapper);
-    wrapper.appendTo(document.body);
-    return img;
   }
   /*
   function layoutModal($box, $img) {

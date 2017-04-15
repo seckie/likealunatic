@@ -42,7 +42,7 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	/**
@@ -112,36 +112,46 @@
 	    var title = this.title || $img.attr('title') || $img.attr('alt');
 	    var titleElement = title ? '<h4 class="modal-title">' + title + '</h4>' : '';
 	    var content = '\n  <div class="modal-dialog" role="document">\n    <div class="modal-content">\n      <div class="modal-header">\n        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>\n        ' + titleElement + '\n      </div>\n      <div class="modal-body"><img src="' + this.href + '" alt="" /></div>\n      <div class="modal-footer">\n        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>\n      </div>\n    </div>\n  </div>\n</div>\n    ';
-	    $box.html(content);
-	    $box.appendTo(document.body);
-	    // activate
-	    $box.modal({
+	    $box.html(content).appendTo(document.body).modal({
 	      backdrop: true,
 	      keyboard: true,
 	      show: false
 	    });
-	    // preload img
-	    preloadImg(this.href);
+
+	    // preload image
+	    preloadImg(this.href).then(function ($img) {
+	      var baseWidth = $img.width();
+	      // set dialog width
+	      var $modalBody = $box.find('.modal-body');
+	      var hPadding = parseInt($modalBody.css('padding-left'), 10) + parseInt($modalBody.css('padding-right'), 10);
+	      $box.find('.modal-dialog').width(baseWidth + hPadding);
+	    });
 
 	    // bind event
 	    $(trigger).on('click', function (e) {
-	      $box.modal('toggle');
-	      //layoutModal($box, $img);
 	      e.preventDefault();
+	      $box.modal('toggle');
 	    });
 	  });
 
 	  function preloadImg(href) {
-	    var wrapper = $('<div class="preload-wrapper"/>').css({
-	      'width': 0,
-	      'height': 0,
-	      'overflow': 'hidden',
-	      'position': 'absolute'
+	    return new Promise(function (resolve, reject) {
+	      var $wrapper = $('<div class="preload-wrapper"/>').css({
+	        'width': 0,
+	        'height': 0,
+	        'overflow': 'hidden',
+	        'position': 'absolute'
+	      });
+	      var $img = $('<img src="' + href + '" alt="" />');
+	      $img.css('visibility', 'hidden').appendTo($wrapper);
+	      $wrapper.appendTo(document.body);
+	      $img.on('load', function (e) {
+	        resolve($img);
+	        setTimeout(function () {
+	          return $wrapper.remove();
+	        }, 500);
+	      });
 	    });
-	    var img = $('<img src="' + href + '" alt="" />');
-	    img.hideVisibility().appendTo(wrapper);
-	    wrapper.appendTo(document.body);
-	    return img;
 	  }
 	  /*
 	  function layoutModal($box, $img) {
@@ -204,9 +214,9 @@
 	  });
 	};
 
-/***/ }),
+/***/ },
 /* 1 */
-/***/ (function(module, exports) {
+/***/ function(module, exports) {
 
 	'use strict';
 
@@ -294,5 +304,5 @@
 
 	exports.default = TwitterUserTimeline;
 
-/***/ })
+/***/ }
 /******/ ]);
