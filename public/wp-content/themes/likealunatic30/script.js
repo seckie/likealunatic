@@ -42,7 +42,7 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	/**
@@ -108,9 +108,10 @@
 	    }
 
 	    var $box = $('<div class="modal fade" role="dialog"/>');
-	    var title = this.title || $(this).find('img').attr('title');
-	    var titleElement = title ? '<h3>' + title + '</h3>' : '';
-	    var content = '\n  <div class="modal-dialog" role="document">\n    <div class="modal-content">\n      <div class="modal-header">\n        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>\n        ' + titleElement + '\n        <h4 class="modal-title">Modal title</h4>\n      </div>\n      <div class="modal-body"><img src="' + this.href + '" alt="" /></div>\n      <div class="modal-footer">\n        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>\n      </div>\n    </div>\n  </div>\n</div>\n    ';
+	    var $img = $(this).find('img');
+	    var title = this.title || $img.attr('title') || $img.attr('alt');
+	    var titleElement = title ? '<h4 class="modal-title">' + title + '</h4>' : '';
+	    var content = '\n  <div class="modal-dialog" role="document">\n    <div class="modal-content">\n      <div class="modal-header">\n        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>\n        ' + titleElement + '\n      </div>\n      <div class="modal-body"><img src="' + this.href + '" alt="" /></div>\n      <div class="modal-footer">\n        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>\n      </div>\n    </div>\n  </div>\n</div>\n    ';
 	    $box.html(content);
 	    $box.appendTo(document.body);
 	    // activate
@@ -203,9 +204,9 @@
 	  });
 	};
 
-/***/ },
+/***/ }),
 /* 1 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	'use strict';
 
@@ -293,5 +294,5 @@
 
 	exports.default = TwitterUserTimeline;
 
-/***/ }
+/***/ })
 /******/ ]);

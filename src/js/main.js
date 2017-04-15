@@ -56,15 +56,15 @@ $(function () {
     if (!trigger.href) { return this; }
 
     const $box = $('<div class="modal fade" role="dialog"/>');
-    const title = this.title || $(this).find('img').attr('title');
-    const titleElement = title ? `<h3>${title}</h3>` : '';
+    const $img = $(this).find('img');
+    const title = this.title || $img.attr('title') || $img.attr('alt');
+    const titleElement = title ? `<h4 class="modal-title">${title}</h4>` : '';
     const content = `
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         ${titleElement}
-        <h4 class="modal-title">Modal title</h4>
       </div>
       <div class="modal-body"><img src="${this.href}" alt="" /></div>
       <div class="modal-footer">
