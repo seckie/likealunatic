@@ -44,10 +44,18 @@ pre code {
 /**
  * overwrite "bootstrap" style
  */
+.modal-dialog {
+  max-width: 93.75%;
+}
+
 .modal-header:after {
   content: "";
   display: block;
   clear: both;
+}
+
+.modal-body img {
+  max-width: 100%;
 }
 
 /* area_hd

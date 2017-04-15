@@ -43,12 +43,14 @@ pre code
 /**
  * overwrite "bootstrap" style
  */
-//.modal
-//  &.fade
-//    top: -100%
-
-.modal-header
-  +clearfix
+.modal
+  &-dialog
+    max-width: percentage((320-20)/320)
+  &-header
+    +clearfix
+  &-body
+    img
+      max-width: 100%
 
 
 /* area_hd

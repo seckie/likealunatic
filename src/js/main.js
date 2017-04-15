@@ -56,15 +56,15 @@ $(function () {
     if (!trigger.href) { return this; }
 
     const $box = $('<div class="modal fade" role="dialog"/>');
-    const title = this.title || $(this).find('img').attr('title');
-    const titleElement = title ? `<h3>${title}</h3>` : '';
+    const $img = $(this).find('img');
+    const title = this.title || $img.attr('title') || $img.attr('alt');
+    const titleElement = title ? `<h4 class="modal-title">${title}</h4>` : '';
     const content = `
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         ${titleElement}
-        <h4 class="modal-title">Modal title</h4>
       </div>
       <div class="modal-body"><img src="${this.href}" alt="" /></div>
       <div class="modal-footer">
@@ -74,36 +74,44 @@ $(function () {
   </div>
 </div>
     `;
-    $box.html(content);
-    $box.appendTo(document.body);
-    // activate
-    $box.modal({
+    $box.html(content).appendTo(document.body).modal({
       backdrop: true,
       keyboard: true,
       show: false
     });
-    // preload img
-    preloadImg(this.href);
+
+    // preload image
+    preloadImg(this.href).then(($img) => {
+      const baseWidth = $img.width();
+      // set dialog width
+      const $modalBody = $box.find('.modal-body');
+      const hPadding = parseInt($modalBody.css('padding-left'), 10) + parseInt($modalBody.css('padding-right'), 10);
+      $box.find('.modal-dialog').width( baseWidth + hPadding );
+    });
 
     // bind event
-    $(trigger).on('click', function (e) {
-      $box.modal('toggle');
-      //layoutModal($box, $img);
+    $(trigger).on('click', (e) => {
       e.preventDefault();
+      $box.modal('toggle');
     });
   });
 
   function preloadImg(href) {
-    var wrapper = $('<div class="preload-wrapper"/>').css({
-      'width': 0,
-      'height': 0,
-      'overflow': 'hidden',
-      'position': 'absolute'
+    return new Promise((resolve, reject) => {
+      const $wrapper = $('<div class="preload-wrapper"/>').css({
+        'width': 0,
+        'height': 0,
+        'overflow': 'hidden',
+        'position': 'absolute'
+      });
+      const $img = $('<img src="' + href + '" alt="" />');
+      $img.css('visibility', 'hidden').appendTo($wrapper);
+      $wrapper.appendTo(document.body);
+      $img.on('load', (e) => {
+        resolve($img);
+        setTimeout(() => $wrapper.remove(), 500);
+      });
     });
-    var img = $('<img src="' + href + '" alt="" />');
-    img.hideVisibility().appendTo(wrapper);
-    wrapper.appendTo(document.body);
-    return img;
   }
   /*
   function layoutModal($box, $img) {
