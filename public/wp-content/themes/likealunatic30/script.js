@@ -145,11 +145,17 @@
 	      var $img = $('<img src="' + href + '" alt="" />');
 	      $img.css('visibility', 'hidden').appendTo($wrapper);
 	      $wrapper.appendTo(document.body);
-	      $img.on('load', function (e) {
+	      // timeout
+	      var timeoutTimer = setTimeout(function () {
+	        reject();
+	        throw new Error('Timed out to load ' + href);
+	      }, 5000);
+	      $img.on('load', function () {
 	        resolve($img);
 	        setTimeout(function () {
 	          return $wrapper.remove();
 	        }, 500);
+	        clearTimeout(timeoutTimer);
 	      });
 	    });
 	  }

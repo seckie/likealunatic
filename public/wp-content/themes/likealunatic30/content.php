@@ -41,6 +41,9 @@
     </div><!-- .entry-summary -->
     <?php else : ?>
     <div class="entry-content">
+      <?php if ( has_post_thumbnail() ) : ?>
+      <p class="featured-image"><?php the_post_thumbnail('full', [ 'class' => 'img-responsive' ]);?></p>
+      <?php endif; ?>
       <?php the_content( __( 'Continue reading <span class="meta-nav">&rarr;</span>', 'twentyeleven' ) ); ?>
       <?php wp_link_pages( array( 'before' => '<div class="page-link"><span>' . __( 'Pages:', 'twentyeleven' ) . '</span>', 'after' => '</div>' ) ); ?>
     </div><!-- .entry-content -->
