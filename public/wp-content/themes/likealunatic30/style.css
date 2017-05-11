@@ -228,34 +228,12 @@ article.post .entry-title {
 }
 
 article.post .entry-content {
-  line-height: 1.66;
+  line-height: 1.75;
 }
 
-article.post h2 {
-  margin-bottom: 9px;
-  font-size: 20px;
-  line-height: 30px;
-}
-
-article.post h3, article.post h4, article.post h5, article.post h6 {
-  margin-bottom: 9px;
-  line-height: 30px;
-}
-
-article.post h3 {
-  font-size: 18px;
-}
-
-article.post h4 {
-  font-size: 16px;
-}
-
-article.post h5 {
-  font-size: 14px;
-}
-
-article.post h6 {
-  font-size: 13px;
+article.post .entry-content h1, article.post .entry-content h2, article.post .entry-content h3, article.post .entry-content h4, article.post .entry-content h5, article.post .entry-content h6, article.post .entry-content p, article.post .entry-content ul, article.post .entry-content ol, article.post .entry-content dl, article.post .entry-content table {
+  margin-top: 1em;
+  margin-bottom: 1em;
 }
 
 article.post .alignleft {
