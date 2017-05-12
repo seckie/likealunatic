@@ -8,6 +8,6 @@ the_excerpt_max_charlength(140);
 <!--/.summary--></div>
 <footer class="article_ft">
 <p class="categories"><?php the_category(', '); ?></p>
-<p class="date">[<?php the_date('Y-m-d H:i:s'); ?>]</p>
+<p class="date">[<?php echo get_the_date('Y-m-d H:i:s'); ?>]</p>
 <!--/.article_ft--></footer>
 <!--/.article1--></article>
