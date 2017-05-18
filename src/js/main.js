@@ -2,8 +2,8 @@
 /**
  * Scripts for likealunatic.jp
  *
- * @author     Naoki Sekiguchi (http://likealunatic.jp)
- * @copyright  Naoki Sekiguchi (http://likealunatic.jp)
+ * @author     Naoki Sekiguchi (https://likealunatic.jp)
+ * @copyright  Naoki Sekiguchi (https://likealunatic.jp)
  * @require    jQuery JavaScript Framework (http://jquery.com/)
  * @version    1.0
  * @since      2012-01-02
