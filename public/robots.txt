@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /docs/
+Disallow: /tmp/
+Disallow: /lib/
+Disallow: /wp-admin/
