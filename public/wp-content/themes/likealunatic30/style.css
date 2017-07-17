@@ -13,7 +13,7 @@
  * base
  */
 body {
-  font-family: Helvetica, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic", Meiryo, "メイリオ",  Osaka, sans-serif;
+  font-family: HiraginoSans-W3, HelveticaNeue, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic", Meiryo, "メイリオ", Osaka, sans-serif;
 }
 
 pre code {
