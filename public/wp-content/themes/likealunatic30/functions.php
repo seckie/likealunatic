@@ -28,3 +28,6 @@ function likealunatic30_content_nav( $nav_id ) {
 }
 endif; // likealunatic30_content_nav
 
+// Hide "generator" meta tag
+remove_action('wp_head', 'wp_generator');
+
