@@ -31,3 +31,9 @@ endif; // likealunatic30_content_nav
 // Hide "generator" meta tag
 remove_action('wp_head', 'wp_generator');
 
+/**
+ * Headers for security
+ */
+header("Content-Security-Policy: default-src 'self' *.google-analytics.com secure.gravatar.com use.fontawesome.com;");
+
+
