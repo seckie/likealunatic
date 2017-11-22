@@ -35,5 +35,8 @@ remove_action('wp_head', 'wp_generator');
  * Headers for security
  */
 header("Content-Security-Policy: default-src 'self' *.google-analytics.com secure.gravatar.com use.fontawesome.com;");
-
+header("X-Frame-Options: SAMEORIGIN");
+header("X-XSS-Protection: 1; mode=block");
+header("X-Content-Type-Options: nosniff");
+header("Referrer-Policy: strict-origin-when-cross-origin");
 
