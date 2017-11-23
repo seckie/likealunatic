@@ -1,3 +1,9 @@
+<?php
+/**
+ * Headers for security
+ */
+header("Content-Security-Policy: default-src 'self' 'unsafe-inline' *.google-analytics.com *.gravatar.com *.fontawesome.com; font-src 'self' data: *.fontawesome.com");
+?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>
