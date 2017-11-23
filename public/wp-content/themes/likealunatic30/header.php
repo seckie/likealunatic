@@ -1,29 +1,67 @@
+<?php
+/**
+ * Headers for security
+ */
+header("Content-Security-Policy: default-src 'self' 'unsafe-inline' *.google-analytics.com *.gravatar.com *.fontawesome.com; font-src 'self' data: *.fontawesome.com");
+
+// Title
+  global $page, $paged;
+
+  $title = wp_title( '|', false, 'right' );
+
+  // Add the blog name.
+  $title .= get_bloginfo( 'name' );
+
+  // Add the blog description for the home/front page.
+  $site_description = get_bloginfo( 'description', 'display' );
+  if ( $site_description && ( is_home() || is_front_page() ) )
+    $title .= " | $site_description";
+
+  // Add a page number if necessary:
+  if ( $paged >= 2 || $page >= 2 )
+    $title .= ' | ' . sprintf( __( 'Page %s', 'twentyeleven' ), max( $paged, $page ) );
+
+// Description
+  $description = is_singular() ? preg_replace('/(\n|\r|Continue reading &rarr;)/', '', strip_tags( get_the_excerpt() ) ) : get_bloginfo('description');
+
+// Keywords
+  $keywords = '';
+  if (is_singular()) {
+    $tags = wp_get_post_tags($post->ID);
+    $tagLabels = array_map(function ($t) {
+      return $t->name;
+    }, $tags);
+    if (count($tagLabels) > 0) {
+      $keywords .= implode(',', $tagLabels) . ',';
+    }
+  }
+  $keywords .= get_bloginfo('name');
+
+// og:type
+  $ogType = is_singular() ? 'article' : 'website';
+// og:url
+  $ogUrl = is_singular() ? get_permalink() : get_bloginfo('url');
+// og:image
+  if ( is_singular() and has_post_thumbnail() ) {
+    $thumb_id = get_post_thumbnail_id();
+    $ogImage = wp_get_attachment_image_src($thumb_id, 'full')[0];
+  } else { 
+    $ogImage = get_bloginfo('url') . '/img/og.png';
+  }
+?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>
 <meta charset="<?php bloginfo( 'charset' ); ?>" />
 <meta name="viewport" content="width=device-width" />
-<title><?php
-  /*
-   * Print the <title> tag based on what is being viewed.
-   */
-  global $page, $paged;
-
-  wp_title( '|', true, 'right' );
-
-  // Add the blog name.
-  bloginfo( 'name' );
-
-  // Add the blog description for the home/front page.
-  $site_description = get_bloginfo( 'description', 'display' );
-  if ( $site_description && ( is_home() || is_front_page() ) )
-    echo " | $site_description";
-
-  // Add a page number if necessary:
-  if ( $paged >= 2 || $page >= 2 )
-    echo ' | ' . sprintf( __( 'Page %s', 'twentyeleven' ), max( $paged, $page ) );
-
-  ?></title>
+<title><?php echo $title; ?></title>
+<meta name="description" content="<?php echo $description; ?>" />
+<meta name="keywords" content="<?php echo $keywords; ?>" />
+<meta property="og:type" content="<?php echo $ogType; ?>" />
+<meta property="og:title" content="<?php echo $title; ?>" />
+<meta property="og:description" content="<?php echo $description; ?>" />
+<meta property="og:url" content="<?php echo $ogUrl; ?>" />
+<meta property="og:image" content="<?php echo $ogImage; ?>" />
 <link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/libs/bootstrap.min.css" />
 <link rel="stylesheet" href="<?php bloginfo( 'stylesheet_url' ); ?>" />
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
@@ -82,27 +120,3 @@ ga('send', 'pageview');
 <!--/.navbar-collapse--></div>
 <!--/.container-fluid--></div>
 <!--/.navbar--></nav>
-
-
-<?php
-// Function from wordress.org
-// http://codex.wordpress.org/Function_Reference/get_the_excerpt
-function the_excerpt_max_charlength($charlength) {
-  $excerpt = get_the_excerpt();
-  $charlength++;
-
-  if ( mb_strlen( $excerpt ) > $charlength ) {
-    $subex = mb_substr( $excerpt, 0, $charlength - 5 );
-    $exwords = explode( ' ', $subex );
-    $excut = - ( mb_strlen( $exwords[ count( $exwords ) - 1 ] ) );
-    if ( $excut < 0 ) {
-      echo mb_substr( $subex, 0, $excut );
-    } else {
-      echo $subex;
-    }
-    echo '[...]';
-  } else {
-    echo $excerpt;
-  }
-}
-?>
