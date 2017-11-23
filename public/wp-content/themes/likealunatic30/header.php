@@ -2,7 +2,7 @@
 /**
  * Headers for security
  */
-header("Content-Security-Policy: default-src 'self' 'unsafe-inline' *.google-analytics.com *.gravatar.com *.fontawesome.com; font-src 'self' data: *.fontawesome.com");
+header("Content-Security-Policy: default-src 'self' 'unsafe-inline' *.google-analytics.com *.gravatar.com *.fontawesome.com *.images-amazon.com; font-src 'self' data: *.fontawesome.com");
 
 // Title
   global $page, $paged;
