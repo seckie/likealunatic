@@ -28,7 +28,7 @@ const PATHS = {
 // methods
 function errorHandler (err, stats) {
   if (err || (stats && stats.compilation.errors.length > 0)) {
-    const error = err || stats.compilation.errors[0].error;
+    const error = err || stats.compilation.errors[0];
     notify.onError({ message: '<%= error.message %>' })(error);
   }
 }
