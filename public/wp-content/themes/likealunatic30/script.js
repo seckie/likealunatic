@@ -78,6 +78,11 @@
 	  // shuffle and sort
 	  var $container = $('div.area_bd').find('div.contents-index');
 
+	  // Add 'table' classNames to tables in article
+	  $('article.post table').each(function (i, table) {
+	    $(table).addClass('table');
+	  });
+
 	  // Twitter user timeline
 	  new _TwitterUserTimeline2.default({
 	    el: '.tweets-contents',
@@ -291,7 +296,7 @@
 	  }, {
 	    key: 'createURLLink',
 	    value: function createURLLink(text) {
-	      return text.replace(/(https?:\/\/[a-zA-Z0-9\-_\.\/]+)/, '<a href="$1" target="_blank">$1</a>');
+	      return text.replace(/(https?:\/\/[a-zA-Z0-9\-_./]+)/, '<a href="$1" target="_blank">$1</a>');
 	    }
 	  }, {
 	    key: 'createReplyLink',

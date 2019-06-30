@@ -27,6 +27,11 @@ $(function () {
   // shuffle and sort
   var $container = $('div.area_bd').find('div.contents-index');
 
+  // Add 'table' classNames to tables in article
+  $('article.post table').each(function (i, table) {
+    $(table).addClass('table');
+  });
+
   // Twitter user timeline
   new TwitterUserTimeline({
     el: '.tweets-contents',
