@@ -64,7 +64,7 @@ class TwitterUserTimeline {
   }
 
   createURLLink (text) {
-    return text.replace(/(https?:\/\/[a-zA-Z0-9\-_\.\/]+)/, '<a href="$1" target="_blank">$1</a>');
+    return text.replace(/(https?:\/\/[a-zA-Z0-9\-_./]+)/, '<a href="$1" target="_blank">$1</a>');
   }
   createReplyLink (text) {
     return text.replace(/@([\w_]+)/, '<a href="http://twitter.com/$1" target="_blank">@$1</a>');
