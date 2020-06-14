@@ -2,9 +2,9 @@
   "name": "likealunatic.jp",
   "version": "0.0.2",
   "dependencies": {
-    "bootstrap": "^3.3.7",
-    "jquery": "^3.2.1",
-    "lodash": "^4.17.11",
+    "bootstrap": "^3.4.1",
+    "jquery": "^3.5.1",
+    "lodash": "^4.17.15",
     "masonry-layout": "^4.1.1"
   },
   "devDependencies": {
