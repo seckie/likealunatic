@@ -45,8 +45,8 @@ header("Content-Security-Policy: default-src 'self' 'unsafe-inline' *.google-ana
   if ( is_singular() and has_post_thumbnail() ) {
     $thumb_id = get_post_thumbnail_id();
     $ogImage = wp_get_attachment_image_src($thumb_id, 'full')[0];
-  } else { 
-    $ogImage = get_bloginfo('url') . '/img/og.png';
+  } else {
+    $ogImage = get_stylesheet_directory_uri() . '/assets/og.png';
   }
 ?>
 <!DOCTYPE html>
