@@ -264,12 +264,6 @@ article.post .alignright {
   position: static;
 }
 
-#commentform .required {
-  position: absolute;
-  top: .5em;
-  left: 133px;
-}
-
 .commentlist {
   margin: 24px 0 36px;
 }
