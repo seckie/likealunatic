@@ -107,11 +107,10 @@ ga('send', 'pageview');
 <!--/.navbar-header--></div>
 <div class="collapse navbar-collapse" id="navbar-collapse">
   <ul class="nav navbar-nav">
-    <li<?php if (is_home()) { ?> class="active"<?php } ?>><a href="<?php bloginfo('url'); ?>/">Home</a></li>
     <li<?php if (is_page('blog') || (!is_home() && !is_page())) { ?> class="active"<?php }?>><a href="<?php bloginfo('url'); ?>/blog/">Blog</a></li>
     <li<?php if (is_page('about')) { ?> class="active"<?php } ?>><a href="<?php bloginfo('url'); ?>/about">About</a></li>
   </ul>
-  <?php get_search_form(); ?>
+  <?php /* get_search_form(); */ ?>
   <ul class="social nav navbar-nav navbar-right">
     <li><a href="https://twitter.com/seckie_"><img src="<?php echo get_stylesheet_directory_uri(); ?>/libs/social-media-icons/16px/twitter.png" alt="" width="16" height="16" /> Twitter</a></li>
     <li><a href="https://www.facebook.com/profile.php?id=100001227105896"><img src="<?php echo get_stylesheet_directory_uri(); ?>/libs/social-media-icons/16px/facebook.png" alt="" width="16" height="16" /> Facebook</a></li>
