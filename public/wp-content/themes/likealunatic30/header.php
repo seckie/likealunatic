@@ -103,7 +103,7 @@ ga('send', 'pageview');
     <span class="icon-bar"></span>
     <span class="icon-bar"></span>
   </button>
-  <a class="navbar-brand" href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a>
+  <span class="navbar-brand" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></span>
 <!--/.navbar-header--></div>
 <div class="collapse navbar-collapse" id="navbar-collapse">
   <ul class="nav navbar-nav">
